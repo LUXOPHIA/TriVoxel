@@ -20,7 +20,7 @@ uses LUX,
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【ルーチン】
 
 function Bezie4( const Ps_:TSingle2DV4; const T_:Single ) :TSingle2D; overload;
-function Bezie4( const Ps_:TDouble2DV4; const T_:Double ) :TDouble2D; overload;                    »
+function Bezie4( const Ps_:TDouble2DV4; const T_:Double ) :TDouble2D; overload;
 function Bezie4( const Ps_:TdSingle2DV4; const T_:TdSingle ) :TdSingle2D; overload;
 function Bezie4( const Ps_:TdDouble2DV4; const T_:TdDouble ) :TdDouble2D; overload;
 
