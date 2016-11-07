@@ -41,9 +41,13 @@ implementation //###############################################################
 
 function Bezie4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingle3D;
 var
+   WX, WY :TSingle4D;
    P1, P2, P3, P4 :TSingle3D;
 begin
-     with Bezie4( T_.X ) do
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
+
+     with WX do
      begin
           P1 := _1 * Ps_._11 + _2 * Ps_._12 + _3 * Ps_._13 + _4 * Ps_._14;
           P2 := _1 * Ps_._21 + _2 * Ps_._22 + _3 * Ps_._23 + _4 * Ps_._24;
@@ -51,7 +55,7 @@ begin
           P4 := _1 * Ps_._41 + _2 * Ps_._42 + _3 * Ps_._43 + _4 * Ps_._44;
      end;
 
-     with Bezie4( T_.Y ) do
+     with WY do
      begin
           Result := _1 * P1 + _2 * P2 + _3 * P3 + _4 * P4;
      end;
@@ -59,9 +63,13 @@ end;
 
 function Bezie4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDouble3D;
 var
+   WX, WY :TDouble4D;
    P1, P2, P3, P4 :TDouble3D;
 begin
-     with Bezie4( T_.X ) do
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
+
+     with WX do
      begin
           P1 := _1 * Ps_._11 + _2 * Ps_._12 + _3 * Ps_._13 + _4 * Ps_._14;
           P2 := _1 * Ps_._21 + _2 * Ps_._22 + _3 * Ps_._23 + _4 * Ps_._24;
@@ -69,7 +77,7 @@ begin
           P4 := _1 * Ps_._41 + _2 * Ps_._42 + _3 * Ps_._43 + _4 * Ps_._44;
      end;
 
-     with Bezie4( T_.Y ) do
+     with WY do
      begin
           Result := _1 * P1 + _2 * P2 + _3 * P3 + _4 * P4;
      end;
@@ -77,9 +85,13 @@ end;
 
 function Bezie4( const Ps_:TdSingle3DM4; const T_:TdSingle2D ) :TdSingle3D;
 var
+   WX, WY :TdSingle4D;
    P1, P2, P3, P4 :TdSingle3D;
 begin
-     with Bezie4( T_.X ) do
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
+
+     with WX do
      begin
           P1 := _1 * Ps_._11 + _2 * Ps_._12 + _3 * Ps_._13 + _4 * Ps_._14;
           P2 := _1 * Ps_._21 + _2 * Ps_._22 + _3 * Ps_._23 + _4 * Ps_._24;
@@ -87,7 +99,7 @@ begin
           P4 := _1 * Ps_._41 + _2 * Ps_._42 + _3 * Ps_._43 + _4 * Ps_._44;
      end;
 
-     with Bezie4( T_.Y ) do
+     with WY do
      begin
           Result := _1 * P1 + _2 * P2 + _3 * P3 + _4 * P4;
      end;
@@ -95,9 +107,13 @@ end;
 
 function Bezie4( const Ps_:TdDouble3DM4; const T_:TdDouble2D ) :TdDouble3D;
 var
+   WX, WY :TdDouble4D;
    P1, P2, P3, P4 :TdDouble3D;
 begin
-     with Bezie4( T_.X ) do
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
+
+     with WX do
      begin
           P1 := _1 * Ps_._11 + _2 * Ps_._12 + _3 * Ps_._13 + _4 * Ps_._14;
           P2 := _1 * Ps_._21 + _2 * Ps_._22 + _3 * Ps_._23 + _4 * Ps_._24;
@@ -105,7 +121,7 @@ begin
           P4 := _1 * Ps_._41 + _2 * Ps_._42 + _3 * Ps_._43 + _4 * Ps_._44;
      end;
 
-     with Bezie4( T_.Y ) do
+     with WY do
      begin
           Result := _1 * P1 + _2 * P2 + _3 * P3 + _4 * P4;
      end;

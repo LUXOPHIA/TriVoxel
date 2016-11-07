@@ -51,65 +51,65 @@ implementation //###############################################################
 
 procedure BSplin4( const T_:TSingle2D; out Ws_:TSingleM4 );
 var
-   BX, BY :TSingle4D;
+   WX, WY :TSingle4D;
 begin
-     BSplin4( T_.X, BX );
-     BSplin4( T_.Y, BY );
+     BSplin4( T_.X, WX );
+     BSplin4( T_.Y, WY );
 
      with Ws_ do
      begin
-          _11 := BY._1 * BX._1;  _12 := BY._1 * BX._2;  _13 := BY._1 * BX._3;  _14 := BY._1 * BX._4;
-          _21 := BY._2 * BX._1;  _22 := BY._2 * BX._2;  _23 := BY._2 * BX._3;  _24 := BY._2 * BX._4;
-          _31 := BY._3 * BX._1;  _32 := BY._3 * BX._2;  _33 := BY._3 * BX._3;  _34 := BY._3 * BX._4;
-          _41 := BY._4 * BX._1;  _42 := BY._4 * BX._2;  _43 := BY._4 * BX._3;  _44 := BY._4 * BX._4;
+          _11 := WY._1 * WX._1;  _12 := WY._1 * WX._2;  _13 := WY._1 * WX._3;  _14 := WY._1 * WX._4;
+          _21 := WY._2 * WX._1;  _22 := WY._2 * WX._2;  _23 := WY._2 * WX._3;  _24 := WY._2 * WX._4;
+          _31 := WY._3 * WX._1;  _32 := WY._3 * WX._2;  _33 := WY._3 * WX._3;  _34 := WY._3 * WX._4;
+          _41 := WY._4 * WX._1;  _42 := WY._4 * WX._2;  _43 := WY._4 * WX._3;  _44 := WY._4 * WX._4;
      end;
 end;
 
 procedure BSplin4( const T_:TDouble2D; out Ws_:TDoubleM4 );
 var
-   BX, BY :TDouble4D;
+   WX, WY :TDouble4D;
 begin
-     BSplin4( T_.X, BX );
-     BSplin4( T_.Y, BY );
+     BSplin4( T_.X, WX );
+     BSplin4( T_.Y, WY );
 
      with Ws_ do
      begin
-          _11 := BY._1 * BX._1;  _12 := BY._1 * BX._2;  _13 := BY._1 * BX._3;  _14 := BY._1 * BX._4;
-          _21 := BY._2 * BX._1;  _22 := BY._2 * BX._2;  _23 := BY._2 * BX._3;  _24 := BY._2 * BX._4;
-          _31 := BY._3 * BX._1;  _32 := BY._3 * BX._2;  _33 := BY._3 * BX._3;  _34 := BY._3 * BX._4;
-          _41 := BY._4 * BX._1;  _42 := BY._4 * BX._2;  _43 := BY._4 * BX._3;  _44 := BY._4 * BX._4;
+          _11 := WY._1 * WX._1;  _12 := WY._1 * WX._2;  _13 := WY._1 * WX._3;  _14 := WY._1 * WX._4;
+          _21 := WY._2 * WX._1;  _22 := WY._2 * WX._2;  _23 := WY._2 * WX._3;  _24 := WY._2 * WX._4;
+          _31 := WY._3 * WX._1;  _32 := WY._3 * WX._2;  _33 := WY._3 * WX._3;  _34 := WY._3 * WX._4;
+          _41 := WY._4 * WX._1;  _42 := WY._4 * WX._2;  _43 := WY._4 * WX._3;  _44 := WY._4 * WX._4;
      end;
 end;
 
 procedure BSplin4( const T_:TdSingle2D; out Ws_:TdSingleM4 );
 var
-   BX, BY :TdSingle4D;
+   WX, WY :TdSingle4D;
 begin
-     BSplin4( T_.X, BX );
-     BSplin4( T_.Y, BY );
+     BSplin4( T_.X, WX );
+     BSplin4( T_.Y, WY );
 
      with Ws_ do
      begin
-          _11 := BY._1 * BX._1;  _12 := BY._1 * BX._2;  _13 := BY._1 * BX._3;  _14 := BY._1 * BX._4;
-          _21 := BY._2 * BX._1;  _22 := BY._2 * BX._2;  _23 := BY._2 * BX._3;  _24 := BY._2 * BX._4;
-          _31 := BY._3 * BX._1;  _32 := BY._3 * BX._2;  _33 := BY._3 * BX._3;  _34 := BY._3 * BX._4;
-          _41 := BY._4 * BX._1;  _42 := BY._4 * BX._2;  _43 := BY._4 * BX._3;  _44 := BY._4 * BX._4;
+          _11 := WY._1 * WX._1;  _12 := WY._1 * WX._2;  _13 := WY._1 * WX._3;  _14 := WY._1 * WX._4;
+          _21 := WY._2 * WX._1;  _22 := WY._2 * WX._2;  _23 := WY._2 * WX._3;  _24 := WY._2 * WX._4;
+          _31 := WY._3 * WX._1;  _32 := WY._3 * WX._2;  _33 := WY._3 * WX._3;  _34 := WY._3 * WX._4;
+          _41 := WY._4 * WX._1;  _42 := WY._4 * WX._2;  _43 := WY._4 * WX._3;  _44 := WY._4 * WX._4;
      end;
 end;
 
 procedure BSplin4( const T_:TdDouble2D; out Ws_:TdDoubleM4 );
 var
-   BX, BY :TdDouble4D;
+   WX, WY :TdDouble4D;
 begin
-     BSplin4( T_.X, BX );
-     BSplin4( T_.Y, BY );
+     BSplin4( T_.X, WX );
+     BSplin4( T_.Y, WY );
 
      with Ws_ do
      begin
-          _11 := BY._1 * BX._1;  _12 := BY._1 * BX._2;  _13 := BY._1 * BX._3;  _14 := BY._1 * BX._4;
-          _21 := BY._2 * BX._1;  _22 := BY._2 * BX._2;  _23 := BY._2 * BX._3;  _24 := BY._2 * BX._4;
-          _31 := BY._3 * BX._1;  _32 := BY._3 * BX._2;  _33 := BY._3 * BX._3;  _34 := BY._3 * BX._4;
-          _41 := BY._4 * BX._1;  _42 := BY._4 * BX._2;  _43 := BY._4 * BX._3;  _44 := BY._4 * BX._4;
+          _11 := WY._1 * WX._1;  _12 := WY._1 * WX._2;  _13 := WY._1 * WX._3;  _14 := WY._1 * WX._4;
+          _21 := WY._2 * WX._1;  _22 := WY._2 * WX._2;  _23 := WY._2 * WX._3;  _24 := WY._2 * WX._4;
+          _31 := WY._3 * WX._1;  _32 := WY._3 * WX._2;  _33 := WY._3 * WX._3;  _34 := WY._3 * WX._4;
+          _41 := WY._4 * WX._1;  _42 := WY._4 * WX._2;  _43 := WY._4 * WX._3;  _44 := WY._4 * WX._4;
      end;
 end;
 
@@ -207,65 +207,65 @@ end;
 
 function Bezie4( const T_:TSingle2D ) :TSingleM4;
 var
-   BX, BY :TSingle4D;
+   WX, WY :TSingle4D;
 begin
-     BX := Bezie4( T_.X );
-     BY := Bezie4( T_.Y );
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
 
      with Result do
      begin
-          _11 := BY._1 * BX._1;  _12 := BY._1 * BX._2;  _13 := BY._1 * BX._3;  _14 := BY._1 * BX._4;
-          _21 := BY._2 * BX._1;  _22 := BY._2 * BX._2;  _23 := BY._2 * BX._3;  _24 := BY._2 * BX._4;
-          _31 := BY._3 * BX._1;  _32 := BY._3 * BX._2;  _33 := BY._3 * BX._3;  _34 := BY._3 * BX._4;
-          _41 := BY._4 * BX._1;  _42 := BY._4 * BX._2;  _43 := BY._4 * BX._3;  _44 := BY._4 * BX._4;
+          _11 := WY._1 * WX._1;  _12 := WY._1 * WX._2;  _13 := WY._1 * WX._3;  _14 := WY._1 * WX._4;
+          _21 := WY._2 * WX._1;  _22 := WY._2 * WX._2;  _23 := WY._2 * WX._3;  _24 := WY._2 * WX._4;
+          _31 := WY._3 * WX._1;  _32 := WY._3 * WX._2;  _33 := WY._3 * WX._3;  _34 := WY._3 * WX._4;
+          _41 := WY._4 * WX._1;  _42 := WY._4 * WX._2;  _43 := WY._4 * WX._3;  _44 := WY._4 * WX._4;
      end;
 end;
 
 function Bezie4( const T_:TDouble2D ) :TDoubleM4;
 var
-   BX, BY :TDouble4D;
+   WX, WY :TDouble4D;
 begin
-     BX := Bezie4( T_.X );
-     BY := Bezie4( T_.Y );
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
 
      with Result do
      begin
-          _11 := BY._1 * BX._1;  _12 := BY._1 * BX._2;  _13 := BY._1 * BX._3;  _14 := BY._1 * BX._4;
-          _21 := BY._2 * BX._1;  _22 := BY._2 * BX._2;  _23 := BY._2 * BX._3;  _24 := BY._2 * BX._4;
-          _31 := BY._3 * BX._1;  _32 := BY._3 * BX._2;  _33 := BY._3 * BX._3;  _34 := BY._3 * BX._4;
-          _41 := BY._4 * BX._1;  _42 := BY._4 * BX._2;  _43 := BY._4 * BX._3;  _44 := BY._4 * BX._4;
+          _11 := WY._1 * WX._1;  _12 := WY._1 * WX._2;  _13 := WY._1 * WX._3;  _14 := WY._1 * WX._4;
+          _21 := WY._2 * WX._1;  _22 := WY._2 * WX._2;  _23 := WY._2 * WX._3;  _24 := WY._2 * WX._4;
+          _31 := WY._3 * WX._1;  _32 := WY._3 * WX._2;  _33 := WY._3 * WX._3;  _34 := WY._3 * WX._4;
+          _41 := WY._4 * WX._1;  _42 := WY._4 * WX._2;  _43 := WY._4 * WX._3;  _44 := WY._4 * WX._4;
      end;
 end;
 
 function Bezie4( const T_:TdSingle2D ) :TdSingleM4;
 var
-   BX, BY :TdSingle4D;
+   WX, WY :TdSingle4D;
 begin
-     BX := Bezie4( T_.X );
-     BY := Bezie4( T_.Y );
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
 
      with Result do
      begin
-          _11 := BY._1 * BX._1;  _12 := BY._1 * BX._2;  _13 := BY._1 * BX._3;  _14 := BY._1 * BX._4;
-          _21 := BY._2 * BX._1;  _22 := BY._2 * BX._2;  _23 := BY._2 * BX._3;  _24 := BY._2 * BX._4;
-          _31 := BY._3 * BX._1;  _32 := BY._3 * BX._2;  _33 := BY._3 * BX._3;  _34 := BY._3 * BX._4;
-          _41 := BY._4 * BX._1;  _42 := BY._4 * BX._2;  _43 := BY._4 * BX._3;  _44 := BY._4 * BX._4;
+          _11 := WY._1 * WX._1;  _12 := WY._1 * WX._2;  _13 := WY._1 * WX._3;  _14 := WY._1 * WX._4;
+          _21 := WY._2 * WX._1;  _22 := WY._2 * WX._2;  _23 := WY._2 * WX._3;  _24 := WY._2 * WX._4;
+          _31 := WY._3 * WX._1;  _32 := WY._3 * WX._2;  _33 := WY._3 * WX._3;  _34 := WY._3 * WX._4;
+          _41 := WY._4 * WX._1;  _42 := WY._4 * WX._2;  _43 := WY._4 * WX._3;  _44 := WY._4 * WX._4;
      end;
 end;
 
 function Bezie4( const T_:TdDouble2D ) :TdDoubleM4;
 var
-   BX, BY :TdDouble4D;
+   WX, WY :TdDouble4D;
 begin
-     BX := Bezie4( T_.X );
-     BY := Bezie4( T_.Y );
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
 
      with Result do
      begin
-          _11 := BY._1 * BX._1;  _12 := BY._1 * BX._2;  _13 := BY._1 * BX._3;  _14 := BY._1 * BX._4;
-          _21 := BY._2 * BX._1;  _22 := BY._2 * BX._2;  _23 := BY._2 * BX._3;  _24 := BY._2 * BX._4;
-          _31 := BY._3 * BX._1;  _32 := BY._3 * BX._2;  _33 := BY._3 * BX._3;  _34 := BY._3 * BX._4;
-          _41 := BY._4 * BX._1;  _42 := BY._4 * BX._2;  _43 := BY._4 * BX._3;  _44 := BY._4 * BX._4;
+          _11 := WY._1 * WX._1;  _12 := WY._1 * WX._2;  _13 := WY._1 * WX._3;  _14 := WY._1 * WX._4;
+          _21 := WY._2 * WX._1;  _22 := WY._2 * WX._2;  _23 := WY._2 * WX._3;  _24 := WY._2 * WX._4;
+          _31 := WY._3 * WX._1;  _32 := WY._3 * WX._2;  _33 := WY._3 * WX._3;  _34 := WY._3 * WX._4;
+          _41 := WY._4 * WX._1;  _42 := WY._4 * WX._2;  _43 := WY._4 * WX._3;  _44 := WY._4 * WX._4;
      end;
 end;
 
@@ -273,9 +273,13 @@ end;
 
 function Bezie4( const Ps_:TSingleM4; const T_:TSingle2D ) :Single;
 var
+   WX, WY :TSingle4D;
    P1, P2, P3, P4 :Single;
 begin
-     with Bezie4( T_.X ) do
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
+
+     with WX do
      begin
           P1 := _1 * Ps_._11 + _2 * Ps_._12 + _3 * Ps_._13 + _4 * Ps_._14;
           P2 := _1 * Ps_._21 + _2 * Ps_._22 + _3 * Ps_._23 + _4 * Ps_._24;
@@ -283,7 +287,7 @@ begin
           P4 := _1 * Ps_._41 + _2 * Ps_._42 + _3 * Ps_._43 + _4 * Ps_._44;
      end;
 
-     with Bezie4( T_.Y ) do
+     with WY do
      begin
           Result := _1 * P1 + _2 * P2 + _3 * P3 + _4 * P4;
      end;
@@ -291,9 +295,13 @@ end;
 
 function Bezie4( const Ps_:TDoubleM4; const T_:TDouble2D ) :Double;
 var
+   WX, WY :TDouble4D;
    P1, P2, P3, P4 :Double;
 begin
-     with Bezie4( T_.X ) do
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
+
+     with WX do
      begin
           P1 := _1 * Ps_._11 + _2 * Ps_._12 + _3 * Ps_._13 + _4 * Ps_._14;
           P2 := _1 * Ps_._21 + _2 * Ps_._22 + _3 * Ps_._23 + _4 * Ps_._24;
@@ -301,7 +309,7 @@ begin
           P4 := _1 * Ps_._41 + _2 * Ps_._42 + _3 * Ps_._43 + _4 * Ps_._44;
      end;
 
-     with Bezie4( T_.Y ) do
+     with WY do
      begin
           Result := _1 * P1 + _2 * P2 + _3 * P3 + _4 * P4;
      end;
@@ -309,9 +317,13 @@ end;
 
 function Bezie4( const Ps_:TdSingleM4; const T_:TdSingle2D ) :TdSingle;
 var
+   WX, WY :TdSingle4D;
    P1, P2, P3, P4 :TdSingle;
 begin
-     with Bezie4( T_.X ) do
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
+
+     with WX do
      begin
           P1 := _1 * Ps_._11 + _2 * Ps_._12 + _3 * Ps_._13 + _4 * Ps_._14;
           P2 := _1 * Ps_._21 + _2 * Ps_._22 + _3 * Ps_._23 + _4 * Ps_._24;
@@ -319,7 +331,7 @@ begin
           P4 := _1 * Ps_._41 + _2 * Ps_._42 + _3 * Ps_._43 + _4 * Ps_._44;
      end;
 
-     with Bezie4( T_.Y ) do
+     with WY do
      begin
           Result := _1 * P1 + _2 * P2 + _3 * P3 + _4 * P4;
      end;
@@ -327,9 +339,13 @@ end;
 
 function Bezie4( const Ps_:TdDoubleM4; const T_:TdDouble2D ) :TdDouble;
 var
+   WX, WY :TdDouble4D;
    P1, P2, P3, P4 :TdDouble;
 begin
-     with Bezie4( T_.X ) do
+     Bezie4( T_.X, WX );
+     Bezie4( T_.Y, WY );
+
+     with WX do
      begin
           P1 := _1 * Ps_._11 + _2 * Ps_._12 + _3 * Ps_._13 + _4 * Ps_._14;
           P2 := _1 * Ps_._21 + _2 * Ps_._22 + _3 * Ps_._23 + _4 * Ps_._24;
@@ -337,7 +353,7 @@ begin
           P4 := _1 * Ps_._41 + _2 * Ps_._42 + _3 * Ps_._43 + _4 * Ps_._44;
      end;
 
-     with Bezie4( T_.Y ) do
+     with WY do
      begin
           Result := _1 * P1 + _2 * P2 + _3 * P3 + _4 * P4;
      end;

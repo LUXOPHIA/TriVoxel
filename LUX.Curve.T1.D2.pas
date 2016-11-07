@@ -5,6 +5,7 @@ interface //####################################################################
 uses LUX,
      LUX.D1,
      LUX.D2, LUX.D2.V4,
+     LUX.D4,
      LUX.Curve.T1.D1;
 
 //type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【型】
@@ -33,35 +34,51 @@ implementation //###############################################################
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【ルーチン】
 
 function Bezie4( const Ps_:TSingle2DV4; const T_:Single ) :TSingle2D;
+var
+   Ws :TSingle4D;
 begin
-     with Bezie4( T_ ) do Result := _1 * Ps_._1
-                                  + _2 * Ps_._2
-                                  + _3 * Ps_._3
-                                  + _4 * Ps_._4;
+     Bezie4( T_, Ws );
+
+     with Ws do Result := _1 * Ps_._1
+                        + _2 * Ps_._2
+                        + _3 * Ps_._3
+                        + _4 * Ps_._4;
 end;
 
 function Bezie4( const Ps_:TDouble2DV4; const T_:Double ) :TDouble2D;
+var
+   Ws :TDouble4D;
 begin
-     with Bezie4( T_ ) do Result := _1 * Ps_._1
-                                  + _2 * Ps_._2
-                                  + _3 * Ps_._3
-                                  + _4 * Ps_._4;
+     Bezie4( T_, Ws );
+
+     with Ws do Result := _1 * Ps_._1
+                        + _2 * Ps_._2
+                        + _3 * Ps_._3
+                        + _4 * Ps_._4;
 end;
 
 function Bezie4( const Ps_:TdSingle2DV4; const T_:TdSingle ) :TdSingle2D;
+var
+   Ws :TdSingle4D;
 begin
-     with Bezie4( T_ ) do Result := _1 * Ps_._1
-                                  + _2 * Ps_._2
-                                  + _3 * Ps_._3
-                                  + _4 * Ps_._4;
+     Bezie4( T_, Ws );
+
+     with Ws do Result := _1 * Ps_._1
+                        + _2 * Ps_._2
+                        + _3 * Ps_._3
+                        + _4 * Ps_._4;
 end;
 
 function Bezie4( const Ps_:TdDouble2DV4; const T_:TdDouble ) :TdDouble2D;
+var
+   Ws :TdDouble4D;
 begin
-     with Bezie4( T_ ) do Result := _1 * Ps_._1
-                                  + _2 * Ps_._2
-                                  + _3 * Ps_._3
-                                  + _4 * Ps_._4;
+     Bezie4( T_, Ws );
+
+     with Ws do Result := _1 * Ps_._1
+                        + _2 * Ps_._2
+                        + _3 * Ps_._3
+                        + _4 * Ps_._4;
 end;
 
 //############################################################################## □
