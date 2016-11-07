@@ -3,8 +3,10 @@
 interface //#################################################################### ■
 
 uses LUX,
-     LUX.D1, LUX.D1.V4, LUX.Matrix.L4,
-     LUX.D2,
+     LUX.D1,
+     LUX.D2, LUX.D2.V4, LUX.D2.M4,
+     LUX.D4,
+     LUX.Matrix.L4,
      LUX.Curve.T1.D1;
 
 //type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【型】
@@ -39,7 +41,7 @@ implementation //###############################################################
 
 function Bezie4( const T_:TSingle2D ) :TSingleM4;
 var
-   BX, BY :TSingleV4;
+   BX, BY :TSingle4D;
 begin
      BX := Bezie4( T_.X );
      BY := Bezie4( T_.Y );
@@ -55,7 +57,7 @@ end;
 
 function Bezie4( const T_:TDouble2D ) :TDoubleM4;
 var
-   BX, BY :TDoubleV4;
+   BX, BY :TDouble4D;
 begin
      BX := Bezie4( T_.X );
      BY := Bezie4( T_.Y );
@@ -71,7 +73,7 @@ end;
 
 function Bezie4( const T_:TdSingle2D ) :TdSingleM4;
 var
-   BX, BY :TdSingleV4;
+   BX, BY :TdSingle4D;
 begin
      BX := Bezie4( T_.X );
      BY := Bezie4( T_.Y );
@@ -87,7 +89,7 @@ end;
 
 function Bezie4( const T_:TdDouble2D ) :TdDoubleM4;
 var
-   BX, BY :TdDoubleV4;
+   BX, BY :TdDouble4D;
 begin
      BX := Bezie4( T_.X );
      BY := Bezie4( T_.Y );
