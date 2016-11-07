@@ -50,6 +50,16 @@ function BSplin4( const X_:Double ) :Double; overload;
 function BSplin4( const X_:TdSingle ) :TdSingle; overload;
 function BSplin4( const X_:TdDouble ) :TdDouble; overload;
 
+procedure BSplin4( const T_:Single; out Ws_:TSingle4D ); overload;
+procedure BSplin4( const T_:Double; out Ws_:TDouble4D ); overload;
+procedure BSplin4( const T_:TdSingle; out Ws_:TdSingle4D ); overload;
+procedure BSplin4( const T_:TdDouble; out Ws_:TdDouble4D ); overload;
+
+function BSplin4( const Ps_:TSingle4D; const T_:Single ) :Single; overload;
+function BSplin4( const Ps_:TDouble4D; const T_:Double ) :Double; overload;
+function BSplin4( const Ps_:TdSingle4D; const T_:TdSingle ) :TdSingle; overload;
+function BSplin4( const Ps_:TdDouble4D; const T_:TdDouble ) :TdDouble; overload;
+
 function Bezie4( const T_:Single ) :TSingle4D; overload;
 function Bezie4( const T_:Double ) :TDouble4D; overload;
 function Bezie4( const T_:TdSingle ) :TdSingle4D; overload;
@@ -478,6 +488,102 @@ begin
               else
      if X < 2 then Result := ( ( 1 - A * X ) * X - 2 ) * X + B
               else Result := 0;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure BSplin4( const T_:Single; out Ws_:TSingle4D );
+begin
+     with Ws_ do
+     begin
+          _1 := BSplin4( T_ + 1 );
+          _2 := BSplin4( T_     );
+          _3 := BSplin4( T_ - 1 );
+          _4 := BSplin4( T_ - 2 );
+     end;
+end;
+
+procedure BSplin4( const T_:Double; out Ws_:TDouble4D );
+begin
+     with Ws_ do
+     begin
+          _1 := BSplin4( T_ + 1 );
+          _2 := BSplin4( T_     );
+          _3 := BSplin4( T_ - 1 );
+          _4 := BSplin4( T_ - 2 );
+     end;
+end;
+
+procedure BSplin4( const T_:TdSingle; out Ws_:TdSingle4D );
+begin
+     with Ws_ do
+     begin
+          _1 := BSplin4( T_ + 1 );
+          _2 := BSplin4( T_     );
+          _3 := BSplin4( T_ - 1 );
+          _4 := BSplin4( T_ - 2 );
+     end;
+end;
+
+procedure BSplin4( const T_:TdDouble; out Ws_:TdDouble4D );
+begin
+     with Ws_ do
+     begin
+          _1 := BSplin4( T_ + 1 );
+          _2 := BSplin4( T_     );
+          _3 := BSplin4( T_ - 1 );
+          _4 := BSplin4( T_ - 2 );
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+function BSplin4( const Ps_:TSingle4D; const T_:Single ) :Single;
+var
+   Ws :TSingle4D;
+begin
+     BSplin4( T_, Ws );
+
+     Result := Ws._1 * Ps_._1
+             + Ws._2 * Ps_._2
+             + Ws._3 * Ps_._3
+             + Ws._4 * Ps_._4;
+end;
+
+function BSplin4( const Ps_:TDouble4D; const T_:Double ) :Double;
+var
+   Ws :TDouble4D;
+begin
+     BSplin4( T_, Ws );
+
+     Result := Ws._1 * Ps_._1
+             + Ws._2 * Ps_._2
+             + Ws._3 * Ps_._3
+             + Ws._4 * Ps_._4;
+end;
+
+function BSplin4( const Ps_:TdSingle4D; const T_:TdSingle ) :TdSingle;
+var
+   Ws :TdSingle4D;
+begin
+     BSplin4( T_, Ws );
+
+     Result := Ws._1 * Ps_._1
+             + Ws._2 * Ps_._2
+             + Ws._3 * Ps_._3
+             + Ws._4 * Ps_._4;
+end;
+
+function BSplin4( const Ps_:TdDouble4D; const T_:TdDouble ) :TdDouble;
+var
+   Ws :TdDouble4D;
+begin
+     BSplin4( T_, Ws );
+
+     Result := Ws._1 * Ps_._1
+             + Ws._2 * Ps_._2
+             + Ws._3 * Ps_._3
+             + Ws._4 * Ps_._4;
 end;
 
 //------------------------------------------------------------------------------
