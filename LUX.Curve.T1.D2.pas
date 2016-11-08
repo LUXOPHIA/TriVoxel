@@ -20,6 +20,11 @@ uses LUX,
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【ルーチン】
 
+function CatmullRom( const P0_,P1_,P2_,P3_:TSingle2D; const T_:Single ) :TSingle2D; overload;
+function CatmullRom( const P0_,P1_,P2_,P3_:TDouble2D; const T_:Double ) :TDouble2D; overload;
+function CatmullRom( const P0_,P1_,P2_,P3_:TdSingle2D; const T_:TdSingle ) :TdSingle2D; overload;
+function CatmullRom( const P0_,P1_,P2_,P3_:TdDouble2D; const T_:TdDouble ) :TdDouble2D; overload;
+
 function Bezie4( const Ps_:TSingle2DV4; const T_:Single ) :TSingle2D; overload;
 function Bezie4( const Ps_:TDouble2DV4; const T_:Double ) :TDouble2D; overload;
 function Bezie4( const Ps_:TdSingle2DV4; const T_:TdSingle ) :TdSingle2D; overload;
@@ -32,6 +37,32 @@ implementation //###############################################################
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【クラス】
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【ルーチン】
+
+function CatmullRom( const P0_,P1_,P2_,P3_:TSingle2D; const T_:Single ) :TSingle2D;
+begin
+     Result.X := CatmullRom( P0_.X, P1_.X, P2_.X, P3_.X, T_ );
+     Result.Y := CatmullRom( P0_.Y, P1_.Y, P2_.Y, P3_.Y, T_ );
+end;
+
+function CatmullRom( const P0_,P1_,P2_,P3_:TDouble2D; const T_:Double ) :TDouble2D;
+begin
+     Result.X := CatmullRom( P0_.X, P1_.X, P2_.X, P3_.X, T_ );
+     Result.Y := CatmullRom( P0_.Y, P1_.Y, P2_.Y, P3_.Y, T_ );
+end;
+
+function CatmullRom( const P0_,P1_,P2_,P3_:TdSingle2D; const T_:TdSingle ) :TdSingle2D;
+begin
+     Result.X := CatmullRom( P0_.X, P1_.X, P2_.X, P3_.X, T_ );
+     Result.Y := CatmullRom( P0_.Y, P1_.Y, P2_.Y, P3_.Y, T_ );
+end;
+
+function CatmullRom( const P0_,P1_,P2_,P3_:TdDouble2D; const T_:TdDouble ) :TdDouble2D;
+begin
+     Result.X := CatmullRom( P0_.X, P1_.X, P2_.X, P3_.X, T_ );
+     Result.Y := CatmullRom( P0_.Y, P1_.Y, P2_.Y, P3_.Y, T_ );
+end;
+
+//------------------------------------------------------------------------------
 
 function Bezie4( const Ps_:TSingle2DV4; const T_:Single ) :TSingle2D;
 var
