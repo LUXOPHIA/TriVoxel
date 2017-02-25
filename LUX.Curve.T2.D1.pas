@@ -31,15 +31,15 @@ function BSplin4( const Ps_:TDoubleM4; const T_:TDouble2D ) :Double; overload;
 function BSplin4( const Ps_:TdSingleM4; const T_:TdSingle2D ) :TdSingle; overload;
 function BSplin4( const Ps_:TdDoubleM4; const T_:TdDouble2D ) :TdDouble; overload;
 
-function Bezie4( const T_:TSingle2D ) :TSingleM4; overload;
-function Bezie4( const T_:TDouble2D ) :TDoubleM4; overload;
-function Bezie4( const T_:TdSingle2D ) :TdSingleM4; overload;
-function Bezie4( const T_:TdDouble2D ) :TdDoubleM4; overload;
+function Bezier4( const T_:TSingle2D ) :TSingleM4; overload;
+function Bezier4( const T_:TDouble2D ) :TDoubleM4; overload;
+function Bezier4( const T_:TdSingle2D ) :TdSingleM4; overload;
+function Bezier4( const T_:TdDouble2D ) :TdDoubleM4; overload;
 
-function Bezie4( const Ps_:TSingleM4; const T_:TSingle2D ) :Single; overload;
-function Bezie4( const Ps_:TDoubleM4; const T_:TDouble2D ) :Double; overload;
-function Bezie4( const Ps_:TdSingleM4; const T_:TdSingle2D ) :TdSingle; overload;
-function Bezie4( const Ps_:TdDoubleM4; const T_:TdDouble2D ) :TdDouble; overload;
+function Bezier4( const Ps_:TSingleM4; const T_:TSingle2D ) :Single; overload;
+function Bezier4( const Ps_:TDoubleM4; const T_:TDouble2D ) :Double; overload;
+function Bezier4( const Ps_:TdSingleM4; const T_:TdSingle2D ) :TdSingle; overload;
+function Bezier4( const Ps_:TdDoubleM4; const T_:TdDouble2D ) :TdDouble; overload;
 
 implementation //############################################################### ■
 
@@ -205,12 +205,12 @@ end;
 
 //------------------------------------------------------------------------------
 
-function Bezie4( const T_:TSingle2D ) :TSingleM4;
+function Bezier4( const T_:TSingle2D ) :TSingleM4;
 var
    WX, WY :TSingle4D;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with Result do
      begin
@@ -221,12 +221,12 @@ begin
      end;
 end;
 
-function Bezie4( const T_:TDouble2D ) :TDoubleM4;
+function Bezier4( const T_:TDouble2D ) :TDoubleM4;
 var
    WX, WY :TDouble4D;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with Result do
      begin
@@ -237,12 +237,12 @@ begin
      end;
 end;
 
-function Bezie4( const T_:TdSingle2D ) :TdSingleM4;
+function Bezier4( const T_:TdSingle2D ) :TdSingleM4;
 var
    WX, WY :TdSingle4D;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with Result do
      begin
@@ -253,12 +253,12 @@ begin
      end;
 end;
 
-function Bezie4( const T_:TdDouble2D ) :TdDoubleM4;
+function Bezier4( const T_:TdDouble2D ) :TdDoubleM4;
 var
    WX, WY :TdDouble4D;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with Result do
      begin
@@ -271,13 +271,13 @@ end;
 
 //------------------------------------------------------------------------------
 
-function Bezie4( const Ps_:TSingleM4; const T_:TSingle2D ) :Single;
+function Bezier4( const Ps_:TSingleM4; const T_:TSingle2D ) :Single;
 var
    WX, WY :TSingle4D;
    P1, P2, P3, P4 :Single;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with WX do
      begin
@@ -293,13 +293,13 @@ begin
      end;
 end;
 
-function Bezie4( const Ps_:TDoubleM4; const T_:TDouble2D ) :Double;
+function Bezier4( const Ps_:TDoubleM4; const T_:TDouble2D ) :Double;
 var
    WX, WY :TDouble4D;
    P1, P2, P3, P4 :Double;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with WX do
      begin
@@ -315,13 +315,13 @@ begin
      end;
 end;
 
-function Bezie4( const Ps_:TdSingleM4; const T_:TdSingle2D ) :TdSingle;
+function Bezier4( const Ps_:TdSingleM4; const T_:TdSingle2D ) :TdSingle;
 var
    WX, WY :TdSingle4D;
    P1, P2, P3, P4 :TdSingle;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with WX do
      begin
@@ -337,13 +337,13 @@ begin
      end;
 end;
 
-function Bezie4( const Ps_:TdDoubleM4; const T_:TdDouble2D ) :TdDouble;
+function Bezier4( const Ps_:TdDoubleM4; const T_:TdDouble2D ) :TdDouble;
 var
    WX, WY :TdDouble4D;
    P1, P2, P3, P4 :TdDouble;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with WX do
      begin

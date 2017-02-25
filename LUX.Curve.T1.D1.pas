@@ -4,7 +4,10 @@ interface //####################################################################
 
 uses LUX,
      LUX.D1,
-     LUX.D4;
+     LUX.D2, LUX.M2,
+     LUX.D3, LUX.M3,
+     LUX.D4, LUX.M4,
+     LUX.D5;
 
 //type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【型】
 
@@ -60,15 +63,57 @@ function BSplin4( const Ps_:TDouble4D; const T_:Double ) :Double; overload;
 function BSplin4( const Ps_:TdSingle4D; const T_:TdSingle ) :TdSingle; overload;
 function BSplin4( const Ps_:TdDouble4D; const T_:TdDouble ) :TdDouble; overload;
 
-procedure Bezie4( const T_:Single; out Ws_:TSingle4D ); overload;
-procedure Bezie4( const T_:Double; out Ws_:TDouble4D ); overload;
-procedure Bezie4( const T_:TdSingle; out Ws_:TdSingle4D ); overload;
-procedure Bezie4( const T_:TdDouble; out Ws_:TdDouble4D ); overload;
+procedure Bezier4( const T_:Single; out Ws_:TSingle4D ); overload;
+procedure Bezier4( const T_:Double; out Ws_:TDouble4D ); overload;
+procedure Bezier4( const T_:TdSingle; out Ws_:TdSingle4D ); overload;
+procedure Bezier4( const T_:TdDouble; out Ws_:TdDouble4D ); overload;
 
-function Bezie4( const Ps_:TSingle4D; const T_:Single ) :Single; overload;
-function Bezie4( const Ps_:TDouble4D; const T_:Double ) :Double; overload;
-function Bezie4( const Ps_:TdSingle4D; const T_:TdSingle ) :TdSingle; overload;
-function Bezie4( const Ps_:TdDouble4D; const T_:TdDouble ) :TdDouble; overload;
+function Bezier4( const Ps_:TSingle4D; const T_:Single ) :Single; overload;
+function Bezier4( const Ps_:TDouble4D; const T_:Double ) :Double; overload;
+function Bezier4( const Ps_:TdSingle4D; const T_:TdSingle ) :TdSingle; overload;
+function Bezier4( const Ps_:TdDouble4D; const T_:TdDouble ) :TdDouble; overload;
+
+function Bezier( const T_:Single; const Cs_:TArray<Single> ) :Single; overload;
+function Bezier( const T_:Double; const Cs_:TArray<Double> ) :Double; overload;
+
+function TrimBezier( const T0_,T1_:Single ) :TSingleM4; overload;
+function TrimBezier( const T0_,T1_:Double ) :TDoubleM4; overload;
+
+function Legendre( const X_:Single; const N_:Cardinal ) :Single; overload;
+function Legendre( const X_:Double; const N_:Cardinal ) :Double; overload;
+
+function Chebyshev1( const X_:Single; const N_:Cardinal ) :Single; overload;
+function Chebyshev1( const X_:Double; const N_:Cardinal ) :Double; overload;
+
+function SumLegendre( const X_:Single; const Ws_:array of Single ) :Single; overload;
+function SumLegendre( const X_:Double; const Ws_:array of Double ) :Double; overload;
+
+function SumChebyshev1( const X_:Single; const Ws_:array of Single ) :Single; overload;
+function SumChebyshev1( const X_:Double; const Ws_:array of Double ) :Double; overload;
+
+function Poly( const X_:Single; const Ks_:TSingle2D ) :Single; overload;
+function Poly( const X_:Double; const Ks_:TDouble2D ) :Double; overload;
+
+function Poly( const X_:Single; const Ks_:TSingle3D ) :Single; overload;
+function Poly( const X_:Double; const Ks_:TDouble3D ) :Double; overload;
+
+function Poly( const X_:Single; const Ks_:TSingle4D ) :Single; overload;
+function Poly( const X_:Double; const Ks_:TDouble4D ) :Double; overload;
+
+function Poly( const X_:Single; const Ks_:TSingle5D ) :Single; overload;
+function Poly( const X_:Double; const Ks_:TDouble5D ) :Double; overload;
+
+function FitPoly( const P_:TSingle4D ) :TSingle4D; overload;
+function FitPoly( const P_:TDouble4D ) :TDouble4D; overload;
+
+function FitPoly( const P_:TSingle5D ) :TSingle5D; overload;
+function FitPoly( const P_:TDouble5D ) :TDouble5D; overload;
+
+procedure RandPoly( out Ks_:TSingle4D ); overload;
+procedure RandPoly( out Ks_:TDouble4D ); overload;
+
+procedure RandPoly( out Ks_:TSingle5D ); overload;
+procedure RandPoly( out Ks_:TDouble5D ); overload;
 
 implementation //############################################################### ■
 
@@ -588,7 +633,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure Bezie4( const T_:Single; out Ws_:TSingle4D );
+procedure Bezier4( const T_:Single; out Ws_:TSingle4D );
 var
    T1, T2, T3,
    S1, S2, S3 :Single;
@@ -606,7 +651,7 @@ begin
      end;
 end;
 
-procedure Bezie4( const T_:Double; out Ws_:TDouble4D );
+procedure Bezier4( const T_:Double; out Ws_:TDouble4D );
 var
    T1, T2, T3,
    S1, S2, S3 :Double;
@@ -624,7 +669,7 @@ begin
      end;
 end;
 
-procedure Bezie4( const T_:TdSingle; out Ws_:TdSingle4D );
+procedure Bezier4( const T_:TdSingle; out Ws_:TdSingle4D );
 var
    T1, T2, T3,
    S1, S2, S3 :TdSingle;
@@ -642,7 +687,7 @@ begin
      end;
 end;
 
-procedure Bezie4( const T_:TdDouble; out Ws_:TdDouble4D );
+procedure Bezier4( const T_:TdDouble; out Ws_:TdDouble4D );
 var
    T1, T2, T3,
    S1, S2, S3 :TdDouble;
@@ -662,11 +707,11 @@ end;
 
 //------------------------------------------------------------------------------
 
-function Bezie4( const Ps_:TSingle4D; const T_:Single ) :Single;
+function Bezier4( const Ps_:TSingle4D; const T_:Single ) :Single;
 var
    Ws :TSingle4D;
 begin
-     Bezie4( T_, Ws );
+     Bezier4( T_, Ws );
 
      with Ws do Result := _1 * Ps_._1
                         + _2 * Ps_._2
@@ -674,11 +719,11 @@ begin
                         + _4 * Ps_._4;
 end;
 
-function Bezie4( const Ps_:TDouble4D; const T_:Double ) :Double;
+function Bezier4( const Ps_:TDouble4D; const T_:Double ) :Double;
 var
    Ws :TDouble4D;
 begin
-     Bezie4( T_, Ws );
+     Bezier4( T_, Ws );
 
      with Ws do Result := _1 * Ps_._1
                         + _2 * Ps_._2
@@ -686,11 +731,11 @@ begin
                         + _4 * Ps_._4;
 end;
 
-function Bezie4( const Ps_:TdSingle4D; const T_:TdSingle ) :TdSingle;
+function Bezier4( const Ps_:TdSingle4D; const T_:TdSingle ) :TdSingle;
 var
    Ws :TdSingle4D;
 begin
-     Bezie4( T_, Ws );
+     Bezier4( T_, Ws );
 
      with Ws do Result := _1 * Ps_._1
                         + _2 * Ps_._2
@@ -698,16 +743,548 @@ begin
                         + _4 * Ps_._4;
 end;
 
-function Bezie4( const Ps_:TdDouble4D; const T_:TdDouble ) :TdDouble;
+function Bezier4( const Ps_:TdDouble4D; const T_:TdDouble ) :TdDouble;
 var
    Ws :TdDouble4D;
 begin
-     Bezie4( T_, Ws );
+     Bezier4( T_, Ws );
 
      with Ws do Result := _1 * Ps_._1
                         + _2 * Ps_._2
                         + _3 * Ps_._3
                         + _4 * Ps_._4;
+end;
+
+//------------------------------------------------------------------------------
+
+function Bezier( const T_:Single; const Cs_:TArray<Single> ) :Single;
+var
+   Cs :TArray<Single>;
+   N, I :Integer;
+begin
+     Cs := Copy( Cs_ );
+
+     for N := High( Cs ) downto 1 do
+     begin
+          for I := 0 to N-1 do Cs[ I ] := Lerp( Cs[ I ], Cs[ I+1 ], T_ );
+     end;
+
+     Result := Cs[ 0 ];
+end;
+
+function Bezier( const T_:Double; const Cs_:TArray<Double> ) :Double;
+var
+   Cs :TArray<Double>;
+   N, I :Integer;
+begin
+     Cs := Copy( Cs_ );
+
+     for N := High( Cs ) downto 1 do
+     begin
+          for I := 0 to N-1 do Cs[ I ] := Lerp( Cs[ I ], Cs[ I+1 ], T_ );
+     end;
+
+     Result := Cs[ 0 ];
+end;
+
+//------------------------------------------------------------------------------
+
+function TrimBezier( const T0_,T1_:Single ) :TSingleM4;
+var
+   Td1, Td2, Td3, Tb1, Tb2, Tb3,
+   Sd1, Sd2, Sd3, Sb1, Sb2, Sb3,
+   W1, W2 :Single;
+begin
+     Td1 :=     T0_;  Td2 := Td1 * Td1;  Td3 := Td1 * Td2;
+     Tb1 := 1 - T0_;  Tb2 := Tb1 * Tb1;  Tb3 := Tb1 * Tb2;
+     Sd1 :=     T1_;  Sd2 := Sd1 * Sd1;  Sd3 := Sd1 * Sd2;
+     Sb1 := 1 - T1_;  Sb2 := Sb1 * Sb1;  Sb3 := Sb1 * Sb2;
+
+     W1 := T1_ - T0_;  W2 := 2 * W1;
+
+     with Result do
+     begin
+          _11 := Tb3      ;  _12 :=   3 * Td1 * Tb1        * Tb1;  _13 :=   3 * Td1 * Tb1        * Td1;  _14 := Td3      ;
+          _21 := Tb2 * Sb1;  _22 := ( 3 * Td1 * Sb1 + W1 ) * Tb1;  _23 := ( 3 * Td1 * Sb1 + W2 ) * Td1;  _24 := Td2 * Sd1;
+          _31 := Tb1 * Sb2;  _32 := ( 3 * Td1 * Sb1 + W2 ) * Sb1;  _33 := ( 3 * Td1 * Sb1 + W1 ) * Sd1;  _34 := Td1 * Sd2;
+          _41 :=       Sb3;  _42 :=   3 * Sd1 * Sb1        * Sb1;  _43 :=   3 * Sd1 * Sb1        * Sd1;  _44 :=       Sd3;
+     end;
+end;
+
+function TrimBezier( const T0_,T1_:Double ) :TDoubleM4;
+var
+   Td1, Td2, Td3, Tb1, Tb2, Tb3,
+   Sd1, Sd2, Sd3, Sb1, Sb2, Sb3,
+   W1, W2 :Double;
+begin
+     Td1 :=     T0_;  Td2 := Td1 * Td1;  Td3 := Td1 * Td2;
+     Tb1 := 1 - T0_;  Tb2 := Tb1 * Tb1;  Tb3 := Tb1 * Tb2;
+     Sd1 :=     T1_;  Sd2 := Sd1 * Sd1;  Sd3 := Sd1 * Sd2;
+     Sb1 := 1 - T1_;  Sb2 := Sb1 * Sb1;  Sb3 := Sb1 * Sb2;
+
+     W1 := T1_ - T0_;  W2 := 2 * W1;
+
+     with Result do
+     begin
+          _11 := Tb3      ;  _12 :=   3 * Td1 * Tb1        * Tb1;  _13 :=   3 * Td1 * Tb1        * Td1;  _14 := Td3      ;
+          _21 := Tb2 * Sb1;  _22 := ( 3 * Td1 * Sb1 + W1 ) * Tb1;  _23 := ( 3 * Td1 * Sb1 + W2 ) * Td1;  _24 := Td2 * Sd1;
+          _31 := Tb1 * Sb2;  _32 := ( 3 * Td1 * Sb1 + W2 ) * Sb1;  _33 := ( 3 * Td1 * Sb1 + W1 ) * Sd1;  _34 := Td1 * Sd2;
+          _41 :=       Sb3;  _42 :=   3 * Sd1 * Sb1        * Sb1;  _43 :=   3 * Sd1 * Sb1        * Sd1;  _44 :=       Sd3;
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+function Legendre( const X_:Single; const N_:Cardinal ) :Single;
+var
+   I :Cardinal;
+   P0, P1, P2 :Single;
+begin
+     if N_ = 0 then Result := 1
+     else
+     begin
+          P1 := 1 ;
+          P2 := X_;
+          for I := 2 to N_ do
+          begin
+               P0 := P1;  P1 := P2;
+
+               P2 := ( ( 2 * I - 1 ) * X_ * P1 - ( I - 1 ) * P0 ) / I;
+          end;
+
+          Result := P2;
+     end;
+end;
+
+function Legendre( const X_:Double; const N_:Cardinal ) :Double;
+var
+   I :Cardinal;
+   P0, P1, P2 :Double;
+begin
+     if N_ = 0 then Result := 1
+     else
+     begin
+          P1 := 1 ;
+          P2 := X_;
+          for I := 2 to N_ do
+          begin
+               P0 := P1;  P1 := P2;
+
+               P2 := ( ( 2 * I - 1 ) * X_ * P1 - ( I - 1 ) * P0 ) / I;
+          end;
+
+          Result := P2;
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+function Chebyshev1( const X_:Single; const N_:Cardinal ) :Single;
+var
+   I :Cardinal;
+   T0, T1, T2 :Single;
+begin
+     if N_ = 0 then Result := 1
+     else
+     begin
+          T1 := 1 ;
+          T2 := X_;
+          for I := 2 to N_ do
+          begin
+               T0 := T1;  T1 := T2;
+
+               T2 := 2 * X_ * T1 - T0;
+          end;
+
+          Result := T2;
+     end;
+end;
+
+function Chebyshev1( const X_:Double; const N_:Cardinal ) :Double;
+var
+   I :Cardinal;
+   T0, T1, T2 :Double;
+begin
+     if N_ = 0 then Result := 1
+     else
+     begin
+          T1 := 1 ;
+          T2 := X_;
+          for I := 2 to N_ do
+          begin
+               T0 := T1;  T1 := T2;
+
+               T2 := 2 * X_ * T1 - T0;
+          end;
+
+          Result := T2;
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+function SumLegendre( const X_:Single; const Ws_:array of Single ) :Single;
+var
+   H, I :Integer;
+   P0, P1, P2 :Single;
+begin
+     Result := Ws_[ 0 ];
+
+     H := High( Ws_ );
+
+     if H > 0 then
+     begin
+          P1 := 1 ;
+          P2 := X_;
+
+          Result := Result + Ws_[ 1 ] * P2;
+
+          for I := 2 to H do
+          begin
+               P0 := P1;  P1 := P2;
+
+               P2 := ( ( 2 * I - 1 ) * X_ * P1 - ( I - 1 ) * P0 ) / I;
+
+               Result := Result + Ws_[ I ] * P2;
+          end;
+     end;
+end;
+
+function SumLegendre( const X_:Double; const Ws_:array of Double ) :Double;
+var
+   H, I :Integer;
+   P0, P1, P2 :Double;
+begin
+     Result := Ws_[ 0 ];
+
+     H := High( Ws_ );
+
+     if H > 0 then
+     begin
+          P1 := 1 ;
+          P2 := X_;
+
+          Result := Result + Ws_[ 1 ] * P2;
+
+          for I := 2 to H do
+          begin
+               P0 := P1;  P1 := P2;
+
+               P2 := ( ( 2 * I - 1 ) * X_ * P1 - ( I - 1 ) * P0 ) / I;
+
+               Result := Result + Ws_[ I ] * P2;
+          end;
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+function SumChebyshev1( const X_:Single; const Ws_:array of Single ) :Single;
+var
+   H, I :Integer;
+   P0, P1, P2 :Single;
+begin
+     Result := Ws_[ 0 ];
+
+     H := High( Ws_ );
+
+     if H > 0 then
+     begin
+          P1 := 1 ;
+          P2 := X_;
+
+          Result := Result + Ws_[ 1 ] * P2;
+
+          for I := 2 to H do
+          begin
+               P0 := P1;  P1 := P2;
+
+               P2 := 2 * X_ * P1 - P0;
+
+               Result := Result + Ws_[ I ] * P2;
+          end;
+     end;
+end;
+
+function SumChebyshev1( const X_:Double; const Ws_:array of Double ) :Double;
+var
+   H, I :Integer;
+   P0, P1, P2 :Double;
+begin
+     Result := Ws_[ 0 ];
+
+     H := High( Ws_ );
+
+     if H > 0 then
+     begin
+          P1 := 1 ;
+          P2 := X_;
+
+          Result := Result + Ws_[ 1 ] * P2;
+
+          for I := 2 to H do
+          begin
+               P0 := P1;  P1 := P2;
+
+               P2 := 2 * X_ * P1 - P0;
+
+               Result := Result + Ws_[ I ] * P2;
+          end;
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+function Poly( const X_:Single; const Ks_:TSingle2D ) :Single;
+begin
+     with Ks_ do Result := _2 * X_ + _1;
+end;
+
+function Poly( const X_:Double; const Ks_:TDouble2D ) :Double;
+begin
+     with Ks_ do Result := _2 * X_ + _1;
+end;
+
+//------------------------------------------------------------------------------
+
+function Poly( const X_:Single; const Ks_:TSingle3D ) :Single;
+begin
+     with Ks_ do Result := ( _3 * X_ + _2 ) * X_ + _1;
+end;
+
+function Poly( const X_:Double; const Ks_:TDouble3D ) :Double;
+begin
+     with Ks_ do Result := ( _3 * X_ + _2 ) * X_ + _1;
+end;
+
+//------------------------------------------------------------------------------
+
+function Poly( const X_:Single; const Ks_:TSingle4D ) :Single;
+begin
+     with Ks_ do Result := ( ( _4 * X_ + _3 ) * X_ + _2 ) * X_ + _1;
+end;
+
+function Poly( const X_:Double; const Ks_:TDouble4D ) :Double;
+begin
+     with Ks_ do Result := ( ( _4 * X_ + _3 ) * X_ + _2 ) * X_ + _1;
+end;
+
+//------------------------------------------------------------------------------
+
+function Poly( const X_:Single; const Ks_:TSingle5D ) :Single;
+begin
+     with Ks_ do Result := ( ( ( _5 * X_ + _4 ) * X_ + _3 ) * X_ + _2 ) * X_ + _1;
+end;
+
+function Poly( const X_:Double; const Ks_:TDouble5D ) :Double;
+begin
+     with Ks_ do Result := ( ( ( _5 * X_ + _4 ) * X_ + _3 ) * X_ + _2 ) * X_ + _1;
+end;
+
+//------------------------------------------------------------------------------
+
+function FitPoly( const P_:TSingle4D ) :TSingle4D;
+const
+     M :TSingleM3 = ( _11:+09  ;  _12:-09/2;  _13:+01  ;
+                      _21:-45/2;  _22:+18  ;  _23:-09/2;
+                      _31:+27/2;  _32:-27/2;  _33:+09/2; );
+var
+   P, K :TSingle3D;
+begin
+     with P_ do
+     begin
+          P._1 := _2 - _1;
+          P._2 := _3 - _1;
+          P._3 := _4 - _1;
+     end;
+
+     K := M * P;
+
+     with Result do
+     begin
+          _1 := P_._1;
+          _2 := K ._1;
+          _3 := K ._2;
+          _4 := K ._3;
+     end;
+end;
+
+function FitPoly( const P_:TDouble4D ) :TDouble4D;
+const
+     M :TDoubleM3 = ( _11:+09  ;  _12:-09/2;  _13:+01  ;
+                      _21:-45/2;  _22:+18  ;  _23:-09/2;
+                      _31:+27/2;  _32:-27/2;  _33:+09/2; );
+var
+   P, K :TDouble3D;
+begin
+     with P_ do
+     begin
+          P._1 := _2 - _1;
+          P._2 := _3 - _1;
+          P._3 := _4 - _1;
+     end;
+
+     K := M * P;
+
+     with Result do
+     begin
+          _1 := P_._1;
+          _2 := K ._1;
+          _3 := K ._2;
+          _4 := K ._3;
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+function FitPoly( const P_:TSingle5D ) :TSingle5D;
+const
+     M :TSingleM4 = ( _11:+016  ;  _12:-012  ;  _13:+016/3;  _14:-001  ;
+                      _21:-208/3;  _22:+076  ;  _23:-112/3;  _24:+022/3;
+                      _31:+096  ;  _32:-128  ;  _33:+224/3;  _34:-016  ;
+                      _41:-128/3;  _42:+064  ;  _43:-128/3;  _44:+032/3; );
+var
+   P, K :TSingle4D;
+begin
+     with P_ do
+     begin
+          P._1 := _2 - _1;
+          P._2 := _3 - _1;
+          P._3 := _4 - _1;
+          P._4 := _5 - _1;
+     end;
+
+     K := M * P;
+
+     with Result do
+     begin
+          _1 := P_._1;
+          _2 := K ._1;
+          _3 := K ._2;
+          _4 := K ._3;
+          _5 := K ._4;
+     end;
+end;
+
+function FitPoly( const P_:TDouble5D ) :TDouble5D;
+const
+     M :TDoubleM4 = ( _11:+016  ;  _12:-012  ;  _13:+016/3;  _14:-001  ;
+                      _21:-208/3;  _22:+076  ;  _23:-112/3;  _24:+022/3;
+                      _31:+096  ;  _32:-128  ;  _33:+224/3;  _34:-016  ;
+                      _41:-128/3;  _42:+064  ;  _43:-128/3;  _44:+032/3; );
+var
+   P, K :TDouble4D;
+begin
+     with P_ do
+     begin
+          P._1 := _2 - _1;
+          P._2 := _3 - _1;
+          P._3 := _4 - _1;
+          P._4 := _5 - _1;
+     end;
+
+     K := M * P;
+
+     with Result do
+     begin
+          _1 := P_._1;
+          _2 := K ._1;
+          _3 := K ._2;
+          _4 := K ._3;
+          _5 := K ._4;
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+procedure RandPoly( out Ks_:TSingle4D );
+var
+   Ws :array [ 0..3 ] of Single;
+   Ps :TSingle4D;
+begin
+     Ws[ 0 ] := 2 * Random - 1;
+     Ws[ 1 ] := 2 * Random - 1;
+     Ws[ 2 ] := 2 * Random - 1;
+     Ws[ 3 ] := 2 * Random - 1;
+
+     with Ps do
+     begin
+          _1 := SumChebyshev1( 0/3, Ws );
+          _2 := SumChebyshev1( 1/3, Ws );
+          _3 := SumChebyshev1( 2/3, Ws );
+          _4 := SumChebyshev1( 3/3, Ws );
+     end;
+
+     Ks_ := FitPoly( Ps / 2 );
+end;
+
+procedure RandPoly( out Ks_:TDouble4D );
+var
+   Ws :array [ 0..3 ] of Double;
+   Ps :TDouble4D;
+begin
+     Ws[ 0 ] := 2 * Random - 1;
+     Ws[ 1 ] := 2 * Random - 1;
+     Ws[ 2 ] := 2 * Random - 1;
+     Ws[ 3 ] := 2 * Random - 1;
+
+     with Ps do
+     begin
+          _1 := SumChebyshev1( 0/3, Ws );
+          _2 := SumChebyshev1( 1/3, Ws );
+          _3 := SumChebyshev1( 2/3, Ws );
+          _4 := SumChebyshev1( 3/3, Ws );
+     end;
+
+     Ks_ := FitPoly( Ps / 2 );
+end;
+
+//------------------------------------------------------------------------------
+
+procedure RandPoly( out Ks_:TSingle5D );
+var
+   Ws :array [ 0..4 ] of Single;
+   Ps :TSingle5D;
+begin
+     Ws[ 0 ] := 2 * Random - 1;
+     Ws[ 1 ] := 2 * Random - 1;
+     Ws[ 2 ] := 2 * Random - 1;
+     Ws[ 3 ] := 2 * Random - 1;
+     Ws[ 4 ] := 2 * Random - 1;
+
+     with Ps do
+     begin
+          _1 := SumChebyshev1( 0/4, Ws );
+          _2 := SumChebyshev1( 1/4, Ws );
+          _3 := SumChebyshev1( 2/4, Ws );
+          _4 := SumChebyshev1( 3/4, Ws );
+          _5 := SumChebyshev1( 4/4, Ws );
+     end;
+
+     Ks_ := FitPoly( Ps / Roo2(5) );
+end;
+
+procedure RandPoly( out Ks_:TDouble5D );
+var
+   Ws :array [ 0..4 ] of Double;
+   Ps :TDouble5D;
+begin
+     Ws[ 0 ] := 2 * Random - 1;
+     Ws[ 1 ] := 2 * Random - 1;
+     Ws[ 2 ] := 2 * Random - 1;
+     Ws[ 3 ] := 2 * Random - 1;
+     Ws[ 4 ] := 2 * Random - 1;
+
+     with Ps do
+     begin
+          _1 := SumChebyshev1( 0/4, Ws );
+          _2 := SumChebyshev1( 1/4, Ws );
+          _3 := SumChebyshev1( 2/4, Ws );
+          _4 := SumChebyshev1( 3/4, Ws );
+          _5 := SumChebyshev1( 4/4, Ws );
+     end;
+
+     Ks_ := FitPoly( Ps / Roo2(5) );
 end;
 
 //############################################################################## □

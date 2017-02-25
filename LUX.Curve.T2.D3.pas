@@ -23,13 +23,13 @@ uses LUX,
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【ルーチン】
 
-function Bezie4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingle3D; overload;
-function Bezie4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDouble3D; overload;
-function Bezie4( const Ps_:TdSingle3DM4; const T_:TdSingle2D ) :TdSingle3D; overload;
-function Bezie4( const Ps_:TdDouble3DM4; const T_:TdDouble2D ) :TdDouble3D; overload;
+function Bezier4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingle3D; overload;
+function Bezier4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDouble3D; overload;
+function Bezier4( const Ps_:TdSingle3DM4; const T_:TdSingle2D ) :TdSingle3D; overload;
+function Bezier4( const Ps_:TdDouble3DM4; const T_:TdDouble2D ) :TdDouble3D; overload;
 
-function TensorBezie4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingleM4; overload;
-function TensorBezie4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDoubleM4; overload;
+function TensorBezier4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingleM4; overload;
+function TensorBezier4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDoubleM4; overload;
 
 implementation //############################################################### ■
 
@@ -39,13 +39,13 @@ implementation //###############################################################
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【ルーチン】
 
-function Bezie4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingle3D;
+function Bezier4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingle3D;
 var
    WX, WY :TSingle4D;
    P1, P2, P3, P4 :TSingle3D;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with WX do
      begin
@@ -61,13 +61,13 @@ begin
      end;
 end;
 
-function Bezie4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDouble3D;
+function Bezier4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDouble3D;
 var
    WX, WY :TDouble4D;
    P1, P2, P3, P4 :TDouble3D;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with WX do
      begin
@@ -83,13 +83,13 @@ begin
      end;
 end;
 
-function Bezie4( const Ps_:TdSingle3DM4; const T_:TdSingle2D ) :TdSingle3D;
+function Bezier4( const Ps_:TdSingle3DM4; const T_:TdSingle2D ) :TdSingle3D;
 var
    WX, WY :TdSingle4D;
    P1, P2, P3, P4 :TdSingle3D;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with WX do
      begin
@@ -105,13 +105,13 @@ begin
      end;
 end;
 
-function Bezie4( const Ps_:TdDouble3DM4; const T_:TdDouble2D ) :TdDouble3D;
+function Bezier4( const Ps_:TdDouble3DM4; const T_:TdDouble2D ) :TdDouble3D;
 var
    WX, WY :TdDouble4D;
    P1, P2, P3, P4 :TdDouble3D;
 begin
-     Bezie4( T_.X, WX );
-     Bezie4( T_.Y, WY );
+     Bezier4( T_.X, WX );
+     Bezier4( T_.Y, WY );
 
      with WX do
      begin
@@ -129,7 +129,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-function TensorBezie4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingleM4;
+function TensorBezier4( const Ps_:TSingle3DM4; const T_:TSingle2D ) :TSingleM4;
 var
    Ps :TdSingle3DM4;
    T :TdSingle2D;
@@ -141,7 +141,7 @@ begin
      T.X.d := +1;
      T.Y.d :=  0;
 
-     with Bezie4( Ps_, T ) do
+     with Bezier4( Ps_, T ) do
      begin
           AP := o;
           AX := d;
@@ -150,7 +150,7 @@ begin
      T.X.d :=  0;
      T.Y.d := -1;
 
-     with Bezie4( Ps_, T ) do
+     with Bezier4( Ps_, T ) do
      begin
           AY := d;
      end;
@@ -168,7 +168,7 @@ begin
      end;
 end;
 
-function TensorBezie4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDoubleM4;
+function TensorBezier4( const Ps_:TDouble3DM4; const T_:TDouble2D ) :TDoubleM4;
 var
    Ps :TdDouble3DM4;
    T :TdDouble2D;
@@ -180,7 +180,7 @@ begin
      T.X.d := +1;
      T.Y.d :=  0;
 
-     with Bezie4( Ps_, T ) do
+     with Bezier4( Ps_, T ) do
      begin
           AP := o;
           AX := d;
@@ -189,7 +189,7 @@ begin
      T.X.d :=  0;
      T.Y.d := -1;
 
-     with Bezie4( Ps_, T ) do
+     with Bezier4( Ps_, T ) do
      begin
           AY := d;
      end;
