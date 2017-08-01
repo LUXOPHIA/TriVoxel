@@ -7,7 +7,8 @@ uses LUX,
      LUX.D2, LUX.M2,
      LUX.D3, LUX.M3,
      LUX.D4, LUX.M4,
-     LUX.D5;
+     LUX.D5,
+     LUX.DN;
 
 //type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【型】
 
@@ -73,8 +74,8 @@ function Bezier4( const Ps_:TDouble4D; const T_:Double ) :Double; overload;
 function Bezier4( const Ps_:TdSingle4D; const T_:TdSingle ) :TdSingle; overload;
 function Bezier4( const Ps_:TdDouble4D; const T_:TdDouble ) :TdDouble; overload;
 
-function Bezier( const T_:Single; const Cs_:TArray<Single> ) :Single; overload;
-function Bezier( const T_:Double; const Cs_:TArray<Double> ) :Double; overload;
+function Bezier( const T_:Single; const Cs_:TSingleND ) :Single; overload;
+function Bezier( const T_:Double; const Cs_:TDoubleND ) :Double; overload;
 
 function TrimBezier( const T0_,T1_:Single ) :TSingleM4; overload;
 function TrimBezier( const T0_,T1_:Double ) :TDoubleM4; overload;
@@ -103,6 +104,9 @@ function Poly( const X_:Double; const Ks_:TDouble4D ) :Double; overload;
 function Poly( const X_:Single; const Ks_:TSingle5D ) :Single; overload;
 function Poly( const X_:Double; const Ks_:TDouble5D ) :Double; overload;
 
+function Poly( const X_:Single; const Ks_:TSingleND ) :Single; overload;
+function Poly( const X_:Double; const Ks_:TDoubleND ) :Double; overload;
+
 function FitPoly( const P_:TSingle4D ) :TSingle4D; overload;
 function FitPoly( const P_:TDouble4D ) :TDouble4D; overload;
 
@@ -114,6 +118,12 @@ procedure RandPoly( out Ks_:TDouble4D ); overload;
 
 procedure RandPoly( out Ks_:TSingle5D ); overload;
 procedure RandPoly( out Ks_:TDouble5D ); overload;
+
+function PolyToBezi( const P_:TSingleND ) :TSingleND; overload;
+function PolyToBezi( const P_:TDoubleND ) :TDoubleND; overload;
+
+function BeziToPoly( const P_:TSingleND ) :TSingleND; overload;
+function BeziToPoly( const P_:TDoubleND ) :TDoubleND; overload;
 
 implementation //############################################################### ■
 
@@ -757,12 +767,12 @@ end;
 
 //------------------------------------------------------------------------------
 
-function Bezier( const T_:Single; const Cs_:TArray<Single> ) :Single;
+function Bezier( const T_:Single; const Cs_:TSingleND ) :Single;
 var
    Cs :TArray<Single>;
    N, I :Integer;
 begin
-     Cs := Copy( Cs_ );
+     Cs := Copy( Cs_._s );
 
      for N := High( Cs ) downto 1 do
      begin
@@ -772,12 +782,12 @@ begin
      Result := Cs[ 0 ];
 end;
 
-function Bezier( const T_:Double; const Cs_:TArray<Double> ) :Double;
+function Bezier( const T_:Double; const Cs_:TDoubleND ) :Double;
 var
    Cs :TArray<Double>;
    N, I :Integer;
 begin
-     Cs := Copy( Cs_ );
+     Cs := Copy( Cs_._s );
 
      for N := High( Cs ) downto 1 do
      begin
@@ -1083,6 +1093,26 @@ end;
 
 //------------------------------------------------------------------------------
 
+function Poly( const X_:Single; const Ks_:TSingleND ) :Single;
+var
+   I :Integer;
+begin
+     Result := Ks_[ Ks_.DimN-1 ];
+
+     for I := Ks_.DimN-2 downto 0 do Result := Result * X_ + Ks_[ I ];
+end;
+
+function Poly( const X_:Double; const Ks_:TDoubleND ) :Double;
+var
+   I :Integer;
+begin
+     Result := Ks_[ Ks_.DimN-1 ];
+
+     for I := Ks_.DimN-2 downto 0 do Result := Result * X_ + Ks_[ I ];
+end;
+
+//------------------------------------------------------------------------------
+
 function FitPoly( const P_:TSingle4D ) :TSingle4D;
 const
      M :TSingleM3 = ( _11:+09  ;  _12:-09/2;  _13:+01  ;
@@ -1285,6 +1315,78 @@ begin
      end;
 
      Ks_ := FitPoly( Ps / Roo2(5) );
+end;
+
+//------------------------------------------------------------------------------
+
+function PolyToBezi( const P_:TSingleND ) :TSingleND;
+var
+   X, Y :Integer;
+begin
+     with Result do
+     begin
+          DimN := P_.DimN;
+
+          for X := 0 to DimN-1 do _s[ X ] := P_[ X ] / Comb( DimN-1, X );
+
+          for Y := 1 to DimN-1 do
+          begin
+               for X := DimN-1 downto Y do _s[ X ] := _s[ X ] + _s[ X-1 ];
+          end;
+     end;
+end;
+
+function PolyToBezi( const P_:TDoubleND ) :TDoubleND;
+var
+   X, Y :Integer;
+begin
+     with Result do
+     begin
+          DimN := P_.DimN;
+
+          for X := 0 to DimN-1 do _s[ X ] := P_[ X ] / Comb( DimN-1, X );
+
+          for Y := 1 to DimN-1 do
+          begin
+               for X := DimN-1 downto Y do _s[ X ] := _s[ X ] + _s[ X-1 ];
+          end;
+     end;
+end;
+
+//------------------------------------------------------------------------------
+
+function BeziToPoly( const P_:TSingleND ) :TSingleND;
+var
+   X, Y :Integer;
+begin
+     with Result do
+     begin
+          _s := Copy( P_._s );
+
+          for Y := 1 to DimN-1 do
+          begin
+               for X := DimN-1 downto Y do _s[ X ] := _s[ X ] - _s[ X-1 ];
+          end;
+
+          for X := 0 to DimN-1 do _s[ X ] := _s[ X ] * Comb( DimN-1, X );
+     end;
+end;
+
+function BeziToPoly( const P_:TDoubleND ) :TDoubleND;
+var
+   X, Y :Integer;
+begin
+     with Result do
+     begin
+          _s := Copy( P_._s );
+
+          for Y := 1 to DimN-1 do
+          begin
+               for X := DimN-1 downto Y do _s[ X ] := _s[ X ] - _s[ X-1 ];
+          end;
+
+          for X := 0 to DimN-1 do _s[ X ] := _s[ X ] * Comb( DimN-1, X );
+     end;
 end;
 
 //############################################################################## □
