@@ -157,7 +157,7 @@ begin
 
      AZ := CrossProduct( AX, AY );
 
-     Result := TSingleM4.Identify;
+     Result := TSingleM4.Identity;
 
      with Result do
      begin
@@ -196,7 +196,7 @@ begin
 
      AZ := CrossProduct( AX, AY );
 
-     Result := TDoubleM4.Identify;
+     Result := TDoubleM4.Identity;
 
      with Result do
      begin
