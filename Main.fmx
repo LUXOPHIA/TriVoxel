@@ -1,9 +1,10 @@
 object Form1: TForm1
   Left = 0
   Top = 0
+  BorderStyle = Single
   Caption = 'TriVoxel'
-  ClientHeight = 620
-  ClientWidth = 820
+  ClientHeight = 570
+  ClientWidth = 1030
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -11,14 +12,74 @@ object Form1: TForm1
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignerMasterStyle = 0
+  object Timer1: TTimer
+    Interval = 10
+    OnTimer = Timer1Timer
+    Left = 25
+    Top = 50
+  end
   inline GLViewer1: TGLViewer
-    Align = Client
-    Margins.Left = 10.000000000000000000
-    Margins.Top = 10.000000000000000000
-    Margins.Right = 10.000000000000000000
-    Margins.Bottom = 10.000000000000000000
-    Size.Width = 800.000000000000000000
-    Size.Height = 600.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 35.000000000000000000
+    Size.Width = 500.000000000000000000
+    Size.Height = 500.000000000000000000
     Size.PlatformDefault = False
+    OnMouseDown = GLViewer1MouseDown
+    OnMouseMove = GLViewer1MouseMove
+    OnMouseUp = GLViewer1MouseUp
+  end
+  inline GLViewer2: TGLViewer
+    Position.X = 520.000000000000000000
+    Position.Y = 35.000000000000000000
+    Size.Width = 500.000000000000000000
+    Size.Height = 500.000000000000000000
+    Size.PlatformDefault = False
+    OnMouseDown = GLViewer1MouseDown
+    OnMouseMove = GLViewer1MouseMove
+    OnMouseUp = GLViewer1MouseUp
+  end
+  object Label1: TLabel
+    StyledSettings = [Family, Style]
+    Position.X = 10.000000000000000000
+    Position.Y = 540.000000000000000000
+    Size.Width = 501.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.HorzAlign = Center
+    Text = '0'
+    TabOrder = 2
+  end
+  object Label2: TLabel
+    StyledSettings = [Family, Style]
+    Position.X = 520.000000000000000000
+    Position.Y = 540.000000000000000000
+    Size.Width = 501.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.HorzAlign = Center
+    Text = '0'
+    TabOrder = 1
+  end
+  object Label3: TLabel
+    Position.X = 10.000000000000000000
+    Position.Y = 10.000000000000000000
+    Size.Width = 500.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.HorzAlign = Center
+    Text = 'PEF : Projected Edge Function'
+    TabOrder = 4
+  end
+  object Label4: TLabel
+    Position.X = 520.000000000000000000
+    Position.Y = 10.000000000000000000
+    Size.Width = 500.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.HorzAlign = Center
+    Text = 'SAT : Separating Axis Ttheorem'
+    TabOrder = 3
   end
 end
