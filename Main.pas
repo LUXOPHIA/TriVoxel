@@ -7,25 +7,28 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls,
   LUX, LUX.D2, LUX.D3, LUX.M4,
+  LUX.Geometry.D3,
   LUX.GPU.OpenGL,
   LUX.GPU.OpenGL.Viewer,
   Core;
 
 type
   TForm1 = class(TForm)
+    LabelP: TLabel;
+    GLViewerP: TGLViewer;
+    LabelPV: TLabel;
+    LabelPVU: TLabel;
+    LabelS: TLabel;
+    GLViewerS: TGLViewer;
+    LabelSV: TLabel;
+    LabelSVU: TLabel;
     Timer1: TTimer;
-    GLViewer1: TGLViewer;
-    GLViewer2: TGLViewer;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure GLViewer1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
-    procedure GLViewer1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
-    procedure GLViewer1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+    procedure GLViewerPMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+    procedure GLViewerPMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
+    procedure GLViewerPMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
   private
     { private 宣言 }
     _MouseS :TShiftState;
@@ -42,6 +45,7 @@ type
     ///// メソッド
     procedure InitTrias;
     procedure MakeTria;
+    procedure UpdateGUI;
   end;
 
 var
@@ -60,58 +64,38 @@ uses System.Math,
 
 procedure TForm1.InitTrias;
 begin
-     with _Trias[ 0 ] do
-     begin
-          Poin1 := 8 * TSingle3D.RandG;
-          Poin2 := 8 * TSingle3D.RandG;
-          Poin3 := 8 * TSingle3D.RandG;
-     end;
-
-     with _Trias[ 1 ] do
-     begin
-          Poin1 := 8 * TSingle3D.RandG;
-          Poin2 := 8 * TSingle3D.RandG;
-          Poin3 := 8 * TSingle3D.RandG;
-     end;
-
-     with _Trias[ 2 ] do
-     begin
-          Poin1 := 8 * TSingle3D.RandG;
-          Poin2 := 8 * TSingle3D.RandG;
-          Poin3 := 8 * TSingle3D.RandG;
-     end;
+     _Trias[ 0 ] := 12 * TSingleTria3D.RandG;
+     _Trias[ 1 ] := 12 * TSingleTria3D.RandG;
+     _Trias[ 2 ] := 12 * TSingleTria3D.RandG;
 
      _FrameI := 0;
 end;
 
 procedure TForm1.MakeTria;
 const
-     _FPS :Integer = 10;
+     N :Integer = 25;
 var
    I :Integer;
-   A :Single;
+   T :Single;
 begin
-     I := _FrameI mod _FPS;
+     I := _FrameI mod N;
 
      if I = 0 then
      begin
           _Trias[ 0 ] := _Trias[ 1 ];
           _Trias[ 1 ] := _Trias[ 2 ];
           _Trias[ 2 ] := _Trias[ 3 ];
-
-          with _Trias[ 3 ] do
-          begin
-               Poin1 := 8 * TSingle3D.RandG;
-               Poin2 := 8 * TSingle3D.RandG;
-               Poin3 := 8 * TSingle3D.RandG;
-          end;
+          _Trias[ 3 ] := 12 * TSingleTria3D.RandG;
      end;
 
-     A := I / _FPS;
+     T := I / N;
 
-     _Tria.Poin1 := ( _Trias[ 2 ].Poin1 - _Trias[ 1 ].Poin1 ) * A + _Trias[ 1 ].Poin1;
-     _Tria.Poin2 := ( _Trias[ 2 ].Poin2 - _Trias[ 1 ].Poin2 ) * A + _Trias[ 1 ].Poin2;
-     _Tria.Poin3 := ( _Trias[ 2 ].Poin3 - _Trias[ 1 ].Poin3 ) * A + _Trias[ 1 ].Poin3;
+     _Tria := BSplin4( _Trias[ 0 ], _Trias[ 1 ], _Trias[ 2 ], _Trias[ 3 ], T );
+end;
+
+procedure TForm1.UpdateGUI;
+begin
+
 end;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -121,8 +105,8 @@ begin
      _Algo1 := TAlgo.Create;
      _Algo2 := TAlgo.Create;
 
-     GLViewer1.Camera := _Algo1.Camera;
-     GLViewer2.Camera := _Algo2.Camera;
+     GLViewerP.Camera := _Algo1.Camera;
+     GLViewerS.Camera := _Algo2.Camera;
 
      _MouseA := TSingle2D.Create( 0, 0 );
 
@@ -141,51 +125,54 @@ end;
 ////////////////////////////////////////////////////////////////////////////////
 
 procedure TForm1.Timer1Timer(Sender: TObject);
-var
-   N1, N2 :Integer;
 begin
      MakeTria;
 
-     _Algo1.Triang.Tria := _Tria;
-     _Algo2.Triang.Tria := _Tria;
+     _Algo1.Triang.Setup( _Tria );
+     _Algo2.Triang.Setup( _Tria );
 
-     N1 := _Algo1.Voxels.MakeVoxels(
-           function( const Box_:TSingleArea3D ) :Boolean
-           begin
-                Result := _Tria.CollisionPEF( Box_ );
-           end );
+     _Algo1.Voxels.MakeVoxels(
+      function( const Box_:TSingleArea3D ) :Boolean
+      begin
+           Result := _Tria.CollisionPEF( Box_ );
+      end );
 
-     N2 := _Algo2.Voxels.MakeVoxels(
-           function( const Box_:TSingleArea3D ) :Boolean
-           begin
-                Result := _Tria.CollisionSAT( Box_ );
-           end );
+     _Algo2.Voxels.MakeVoxels(
+      function( const Box_:TSingleArea3D ) :Boolean
+      begin
+           Result := _Tria.CollisionSAT( Box_ );
+      end );
 
-     GLViewer1.Repaint;
-     GLViewer2.Repaint;
+     with _MouseA do X := X - 0.5;
 
-     Label1.Text := N1.ToString;
-     Label2.Text := N2.ToString;
+     _Algo1.SetupCamera( _MouseA );
+     _Algo2.SetupCamera( _MouseA );
 
-     if N2 < N1 then
+     GLViewerP.Repaint;
+     GLViewerS.Repaint;
+
+     LabelPV.Text := _Algo1.Voxels.Count.ToString;
+     LabelSV.Text := _Algo2.Voxels.Count.ToString;
+
+     if _Algo2.Voxels.Count < _Algo1.Voxels.Count then
      begin
-          Label1.FontColor := TAlphaColors.Red;
-          Label2.FontColor := TAlphaColors.Blue;
+          LabelPV.FontColor := TAlphaColors.Red;
+          LabelSV.FontColor := TAlphaColors.Blue;
 
           System.SysUtils.Beep;  Timer1.Enabled := False;
      end
      else
-     if N1 < N2 then
+     if _Algo1.Voxels.Count < _Algo2.Voxels.Count then
      begin
-          Label1.FontColor := TAlphaColors.Blue;
-          Label2.FontColor := TAlphaColors.Red;
+          LabelPV.FontColor := TAlphaColors.Blue;
+          LabelSV.FontColor := TAlphaColors.Red;
 
           System.SysUtils.Beep;  Timer1.Enabled := False;
      end
      else
      begin
-          Label1.FontColor := TAlphaColors.Black;
-          Label2.FontColor := TAlphaColors.Black;
+          LabelPV.FontColor := TAlphaColors.Black;
+          LabelSV.FontColor := TAlphaColors.Black;
      end;
 
      Inc( _FrameI );
@@ -193,13 +180,13 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure TForm1.GLViewer1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+procedure TForm1.GLViewerPMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
      _MouseS := Shift;
      _MouseP := TSingle2D.Create( X, Y );
 end;
 
-procedure TForm1.GLViewer1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
+procedure TForm1.GLViewerPMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
 var
    P :TSingle2D;
 begin
@@ -212,14 +199,14 @@ begin
           _Algo1.SetupCamera( _MouseA );
           _Algo2.SetupCamera( _MouseA );
 
-          GLViewer1.Repaint;
-          GLViewer2.Repaint;
+          GLViewerP.Repaint;
+          GLViewerS.Repaint;
 
           _MouseP := P;
      end;
 end;
 
-procedure TForm1.GLViewer1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
+procedure TForm1.GLViewerPMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
      _MouseS := [];
 end;

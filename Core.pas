@@ -4,6 +4,7 @@ interface //####################################################################
 
 uses System.SysUtils, System.UITypes,
      LUX, LUX.D1, LUX.D2, LUX.D3, LUX.M4,
+     LUX.Geometry.D3,
      LUX.GPU.OpenGL,
      LUX.GPU.OpenGL.Scener,
      LUX.GPU.OpenGL.Camera,
@@ -15,127 +16,47 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
      //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【レコード】
 
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TSingleTria2D
-
-     //  P3              P* :Poin*
-     //  │＼            E* :Edge*
-     //  │  ＼          N* :Enor*
-     //  │    ＼
-     //  E2─N2  E1
-     //  │    ／  ＼
-     //  │  N1  N3  ＼
-     //  │      │    ＼
-     //  P1───E3───P2
-
-     TSingleTria2D = record
-     private
-       ///// アクセス
-       function GetNorv :Single;
-       function GetEdge1 :TSingle2D;
-       function GetEdge2 :TSingle2D;
-       function GetEdge3 :TSingle2D;
-       function GetEnor1 :TSingle2D;
-       function GetEnor2 :TSingle2D;
-       function GetEnor3 :TSingle2D;
-       function GetAABB :TSingleArea2D;
-     public
-       Poin1 :TSingle2D;
-       Poin2 :TSingle2D;
-       Poin3 :TSingle2D;
-       ///// プロパティ
-       property Norv  :Single        read GetNorv ;
-       property Edge1 :TSingle2D     read GetEdge1;
-       property Edge2 :TSingle2D     read GetEdge2;
-       property Edge3 :TSingle2D     read GetEdge3;
-       property Enor1 :TSingle2D     read GetEnor1;
-       property Enor2 :TSingle2D     read GetEnor2;
-       property Enor3 :TSingle2D     read GetEnor3;
-       property AABB  :TSingleArea2D read GetAABB ;
-       ///// メソッド
-       function ColliEdge( const Area_:TSingleArea2D ) :Boolean;
-       function Collision( const Area_:TSingleArea2D ) :Boolean;
-     end;
-
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TSingleTria3D
-
-     //  P3        P* :Poin*
-     //  │＼      E* :Edge*
-     //  E2  E1
-     //  │    ＼
-     //  P1─E3─P2
-
-     TSingleTria3D = record
-     private
-       ///// アクセス
-       function GetNorv :TSingle3D;
-       function GetEdge1 :TSingle3D;
-       function GetEdge2 :TSingle3D;
-       function GetEdge3 :TSingle3D;
-       function GetProjXY :TSingleTria2D;
-       function GetProjYZ :TSingleTria2D;
-       function GetProjZX :TSingleTria2D;
-       function GetAABB :TSingleArea3D;
-     public
-       Poin1 :TSingle3D;
-       Poin2 :TSingle3D;
-       Poin3 :TSingle3D;
-       ///// プロパティ
-       property Norv   :TSingle3D     read GetNorv  ;
-       property Edge1  :TSingle3D     read GetEdge1 ;
-       property Edge2  :TSingle3D     read GetEdge2 ;
-       property Edge3  :TSingle3D     read GetEdge3 ;
-       property ProjXY :TSingleTria2D read GetProjXY;
-       property ProjYZ :TSingleTria2D read GetProjYZ;
-       property ProjZX :TSingleTria2D read GetProjZX;
-       property AABB   :TSingleArea3D read GetAABB  ;
-       ///// メソッド
-       function ProjVec( const Vec_:TSingle3D ) :TSingleArea;
-       function CollisionPEF( const Area_:TSingleArea3D ) :Boolean;
-       function CollisionSAT( const Area_:TSingleArea3D ) :Boolean;
-     end;
-
      //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【クラス】
 
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLTriang
+     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLShaperTriang
 
-     TGLTriang = class( TGLShaperFace )
+     TGLShaperTriang = class( TGLShaperFace )
      private
      protected
-       ///// アクセス
-       procedure SetTria( const Tria_:TSingleTria3D );
      public
        constructor Create; override;
        destructor Destroy; override;
-       ///// プロパティ
-       property Tria :TSingleTria3D write SetTria;
+       ///// メソッド
+       procedure Setup( const Tria_:TSingleTria3D );
      end;
 
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLVoxelsM
+     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLMateryVoxels
 
-     TGLVoxelsM = class( TGLMateryG )
+     TGLMateryVoxels = class( TGLMateryG )
      private
      protected
        ///// アクセス
      public
        constructor Create;
        destructor Destroy; override;
-       ///// プロパティ
-       ///// メソッド
      end;
 
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLVoxels
+     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLShaperVoxels
 
-     TGLVoxels = class( TGLShaperPoin )
+     TGLShaperVoxels = class( TGLShaperPoin )
      private
      protected
+       ///// アクセス
+       function GetCount :Integer;
      public
-       type TCollider = reference to function( const Box_:TSingleArea3D ) :Boolean;
+       type TCollider = reference to function( const Area_:TSingleArea3D ) :Boolean;
      public
        constructor Create; override;
        destructor Destroy; override;
        ///// プロパティ
+       property Count :Integer read GetCount;
        ///// メソッド
-       function MakeVoxels( const Func_:TCollider ) :Integer;
+       procedure MakeVoxels( const Collider_:TCollider );
      end;
 
      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TAlgo
@@ -143,15 +64,17 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      TAlgo = class
      private
      protected
+       _Scener :TGLScener;
+       _Camera :TGLCameraPers;
+       _Triang :TGLShaperTriang;
+       _Voxels :TGLShaperVoxels;
      public
-       Scener :TGLScener;
-       Camera :TGLCameraPers;
-       Triang :TGLTriang;
-       Voxels :TGLVoxels;
-       /////
        constructor Create;
        destructor Destroy; override;
        ///// プロパティ
+       property Camera :TGLCameraPers read _Camera;
+       property Triang :TGLShaperTriang     read _Triang;
+       property Voxels :TGLShaperVoxels     read _Voxels;
        ///// メソッド
        procedure SetupCamera( const MouseA_:TSingle2D );
      end;
@@ -164,287 +87,23 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 implementation //############################################################### ■
 
-uses System.Math;
+uses System.Math,
+     LUX.D4, LUX.Curve.T1.D1,
+     LUX.GPU.OpenGL.Matery.Preset;
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【レコード】
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TSingleTria2D
-
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
-
-/////////////////////////////////////////////////////////////////////// アクセス
-
-function TSingleTria2D.GetNorv :Single;
-begin
-     Result := CrossProduct( Edge2, Edge3 );
-end;
-
-//------------------------------------------------------------------------------
-
-function TSingleTria2D.GetEdge1 :TSingle2D;
-begin
-     Result := Poin2.VectorTo( Poin3 );
-end;
-
-function TSingleTria2D.GetEdge2 :TSingle2D;
-begin
-     Result := Poin3.VectorTo( Poin1 );
-end;
-
-function TSingleTria2D.GetEdge3 :TSingle2D;
-begin
-     Result := Poin1.VectorTo( Poin2 );
-end;
-
-//------------------------------------------------------------------------------
-
-function TSingleTria2D.GetEnor1 :TSingle2D;
-begin
-     Result := Norv * Edge1.RotL90;
-end;
-
-function TSingleTria2D.GetEnor2 :TSingle2D;
-begin
-     Result := Norv * Edge2.RotL90;
-end;
-
-function TSingleTria2D.GetEnor3 :TSingle2D;
-begin
-     Result := Norv * Edge3.RotL90;
-end;
-
-//------------------------------------------------------------------------------
-
-function TSingleTria2D.GetAABB :TSingleArea2D;
-begin
-     with Result do
-     begin
-          ProjX := TSingleArea.Create( Poin1.X, Poin2.X, Poin3.X );
-          ProjY := TSingleArea.Create( Poin1.Y, Poin2.Y, Poin3.Y );
-     end;
-end;
-
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
-
-function TSingleTria2D.ColliEdge( const Area_:TSingleArea2D ) :Boolean;
-//······································
-     function CheckEdge( const N,P:TSingle2D ) :Boolean;
-     var
-        B, V :TSingle2D;
-     begin
-          B := Area_.Poin[ N.Orthant ];
-
-          V := P.VectorTo( B );
-
-          Result := DotProduct( N, V ) > 0;
-     end;
-//······································
-begin
-     //  P3
-     //  │＼
-     //  │  ＼
-     //  │    ＼
-     //  E2─N2  E1
-     //  │    ／  ＼
-     //  │  N1  N3  ＼
-     //  │      │    ＼
-     //  P1───E3───P2
-
-     Result := CheckEdge( Enor1, Poin2 )
-           and CheckEdge( Enor2, Poin3 )
-           and CheckEdge( Enor3, Poin1 );
-end;
-
-function TSingleTria2D.Collision( const Area_:TSingleArea2D ) :Boolean;
-begin
-     Result := AABB.Collision( Area_ ) and ColliEdge( Area_ );
-end;
-
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TSingleTria3D
-
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
-
-/////////////////////////////////////////////////////////////////////// アクセス
-
-function TSingleTria3D.GetNorv :TSingle3D;
-begin
-     Result := CrossProduct( Edge2, Edge3 );
-end;
-
-//------------------------------------------------------------------------------
-
-function TSingleTria3D.GetEdge1 :TSingle3D;
-begin
-     Result := Poin2.VectorTo( Poin3 );
-end;
-
-function TSingleTria3D.GetEdge2 :TSingle3D;
-begin
-     Result := Poin3.VectorTo( Poin1 );
-end;
-
-function TSingleTria3D.GetEdge3 :TSingle3D;
-begin
-     Result := Poin1.VectorTo( Poin2 );
-end;
-
-//------------------------------------------------------------------------------
-
-function TSingleTria3D.GetProjXY :TSingleTria2D;
-begin
-     with Poin1 do Result.Poin1 := TSingle2D.Create( X, Y );
-     with Poin2 do Result.Poin2 := TSingle2D.Create( X, Y );
-     with Poin3 do Result.Poin3 := TSingle2D.Create( X, Y );
-end;
-
-function TSingleTria3D.GetProjYZ :TSingleTria2D;
-begin
-     with Poin1 do Result.Poin1 := TSingle2D.Create( Y, Z );
-     with Poin2 do Result.Poin2 := TSingle2D.Create( Y, Z );
-     with Poin3 do Result.Poin3 := TSingle2D.Create( Y, Z );
-end;
-
-function TSingleTria3D.GetProjZX :TSingleTria2D;
-begin
-     with Poin1 do Result.Poin1 := TSingle2D.Create( Z, X );
-     with Poin2 do Result.Poin2 := TSingle2D.Create( Z, X );
-     with Poin3 do Result.Poin3 := TSingle2D.Create( Z, X );
-end;
-
-//------------------------------------------------------------------------------
-
-function TSingleTria3D.GetAABB :TSingleArea3D;
-begin
-     with Result do
-     begin
-          ProjX := TSingleArea.Create( Poin1.X, Poin2.X, Poin3.X );
-          ProjY := TSingleArea.Create( Poin1.Y, Poin2.Y, Poin3.Y );
-          ProjZ := TSingleArea.Create( Poin1.Z, Poin2.Z, Poin3.Z );
-     end;
-end;
-
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
-
-function TSingleTria3D.ProjVec( const Vec_:TSingle3D ) :TSingleArea;
-var
-   C1, C2, C3 :Single;
-begin
-     C1 := DotProduct( Vec_, Poin1 );
-     C2 := DotProduct( Vec_, Poin2 );
-     C3 := DotProduct( Vec_, Poin3 );
-
-     Result := TSingleArea.Create( C1, C2, C3 );
-end;
-
-function TSingleTria3D.CollisionPEF( const Area_:TSingleArea3D ) :Boolean;
-//······································
-     function CheckPlane :Boolean;
-     var
-        N, B0, B1, V0, V1 :TSingle3D;
-        I0, I1 :Byte;
-        C0, C1 :Single;
-     begin
-          N := Norv;
-
-          I1 := N.Orthant;
-          I0 := I1 xor 7;
-
-          B0 := Area_.Poin[ I0 ];
-          B1 := Area_.Poin[ I1 ];
-
-          V0 := Poin1.VectorTo( B0 );
-          V1 := Poin1.VectorTo( B1 );
-
-          C0 := DotProduct( N, V0 );
-          C1 := DotProduct( N, V1 );
-
-          Result := ( C0 * C1 ) < 0;
-     end;
-//······································
-begin
-     Result := AABB.Collision( Area_ )
-           and CheckPlane
-           and ProjXY.ColliEdge( Area_.ProjXY )
-           and ProjYZ.ColliEdge( Area_.ProjYZ )
-           and ProjZX.ColliEdge( Area_.ProjZX );
-end;
-
-function TSingleTria3D.CollisionSAT( const Area_:TSingleArea3D ) :Boolean;
-//······································
-     function CheckPlane :Boolean;
-     var
-        N, B0, B1, V0, V1 :TSingle3D;
-        I0, I1 :Byte;
-        C0, C1 :Single;
-     begin
-          N := Norv;
-
-          I1 := N.Orthant;
-          I0 := I1 xor 7;
-
-          B0 := Area_.Poin[ I0 ];
-          B1 := Area_.Poin[ I1 ];
-
-          V0 := Poin1.VectorTo( B0 );
-          V1 := Poin1.VectorTo( B1 );
-
-          C0 := DotProduct( N, V0 );
-          C1 := DotProduct( N, V1 );
-
-          Result := ( C0 * C1 ) < 0;
-     end;
-     //·································
-     function Check( const Vec_:TSingle3D ) :Boolean;
-     begin
-          Result := ProjVec( Vec_ ).Collision( Area_.ProjVec( Vec_ ) );
-     end;
-//······································
-const
-     AX :TSingle3D = ( X:1; Y:0; Z:0 );
-     AY :TSingle3D = ( X:0; Y:1; Z:0 );
-     AZ :TSingle3D = ( X:0; Y:0; Z:1 );
-var
-   E1, E2, E3 :TSingle3D;
-begin
-     E1 := Edge1;
-     E2 := Edge2;
-     E3 := Edge3;
-
-     Result := Check( Norv )
-           and Check( AX )
-           and Check( AY )
-           and Check( AZ )
-           and Check( CrossProduct( AX, E1 ) )
-           and Check( CrossProduct( AX, E2 ) )
-           and Check( CrossProduct( AX, E3 ) )
-           and Check( CrossProduct( AY, E1 ) )
-           and Check( CrossProduct( AY, E2 ) )
-           and Check( CrossProduct( AY, E3 ) )
-           and Check( CrossProduct( AZ, E1 ) )
-           and Check( CrossProduct( AZ, E2 ) )
-           and Check( CrossProduct( AZ, E3 ) );
-end;
-
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【クラス】
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLTriang
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLShaperTriang
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& protected
 
-/////////////////////////////////////////////////////////////////////// アクセス
-
-procedure TGLTriang.SetTria( const Tria_:TSingleTria3D );
-begin
-     PosBuf[ 0 ] := Tria_.Poin1;
-     PosBuf[ 1 ] := Tria_.Poin2;
-     PosBuf[ 2 ] := Tria_.Poin3;
-end;
-
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
 
-constructor TGLTriang.Create;
+constructor TGLShaperTriang.Create;
 begin
      inherited;
 
@@ -457,13 +116,22 @@ begin
      EleBuf[ 1 ] := TCardinal3D.Create( 2, 1, 0 );
 end;
 
-destructor TGLTriang.Destroy;
+destructor TGLShaperTriang.Destroy;
 begin
 
      inherited;
 end;
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLVoxelsM
+/////////////////////////////////////////////////////////////////////// メソッド
+
+procedure TGLShaperTriang.Setup( const Tria_:TSingleTria3D );
+begin
+     PosBuf[ 0 ] := Tria_.Poin1;
+     PosBuf[ 1 ] := Tria_.Poin2;
+     PosBuf[ 2 ] := Tria_.Poin3;
+end;
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLMateryVoxels
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
@@ -473,7 +141,7 @@ end;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
 
-constructor TGLVoxelsM.Create;
+constructor TGLMateryVoxels.Create;
 begin
      inherited;
 
@@ -628,7 +296,7 @@ begin
      end;
 end;
 
-destructor TGLVoxelsM.Destroy;
+destructor TGLMateryVoxels.Destroy;
 begin
 
      inherited;
@@ -636,19 +304,24 @@ end;
 
 /////////////////////////////////////////////////////////////////////// メソッド
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLVoxels
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLShaperVoxels
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& protected
 
+function TGLShaperVoxels.GetCount :Integer;
+begin
+     Result := PosBuf.Count;
+end;
+
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
 
-constructor TGLVoxels.Create;
+constructor TGLShaperVoxels.Create;
 begin
      inherited;
 
-     _Matery := TGLVoxelsM.Create;
+     _Matery := TGLMateryVoxels.Create;
 
      with TGLShaperLineCube.Create( Self ) do
      begin
@@ -658,7 +331,7 @@ begin
      end;
 end;
 
-destructor TGLVoxels.Destroy;
+destructor TGLShaperVoxels.Destroy;
 begin
 
      inherited;
@@ -666,12 +339,12 @@ end;
 
 /////////////////////////////////////////////////////////////////////// メソッド
 
-function TGLVoxels.MakeVoxels( const Func_:TCollider ) :Integer;
+procedure TGLShaperVoxels.MakeVoxels( const Collider_:TCollider );
 var
+   Cs :TArray<TSingle3D>;
    X, Y, Z :Integer;
    C :TSingle3D;
    B :TSingleArea3D;
-   Cs :TArray<TSingle3D>;
 begin
      Cs := [];
 
@@ -696,14 +369,12 @@ begin
                     B.Min.X := C.X - 0.5;
                     B.Max.X := C.X + 0.5;
 
-                    if Func_( B ) then Cs := Cs + [ C ];
+                    if Collider_( B ) then Cs := Cs + [ C ];
                end;
           end;
      end;
 
      PosBuf.Import( Cs );
-
-     Result := Length( Cs );
 end;
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TAlgo
@@ -718,15 +389,15 @@ constructor TAlgo.Create;
 begin
      inherited;
 
-     Scener := TGLScener    .Create          ;
-     Camera := TGLCameraPers.Create( Scener );
-     Triang := TGLTriang    .Create( Scener );
-     Voxels := TGLVoxels    .Create( Scener );
+     _Scener := TGLScener      .Create          ;
+     _Camera := TGLCameraPers  .Create( _Scener );
+     _Triang := TGLShaperTriang.Create( _Scener );
+     _Voxels := TGLShaperVoxels.Create( _Scener );
 end;
 
 destructor TAlgo.Destroy;
 begin
-     Scener.DisposeOf;
+     _Scener.DisposeOf;
 
      inherited;
 end;
@@ -735,9 +406,9 @@ end;
 
 procedure TAlgo.SetupCamera( const MouseA_:TSingle2D );
 begin
-     Camera.Pose := TSingleM4.RotateY( DegToRad( -MouseA_.X ) )
-                  * TSingleM4.RotateX( DegToRad( -MouseA_.Y ) )
-                  * TSingleM4.Translate( 0, 0, 16+Roo2(3)*16 );
+     _Camera.Pose := TSingleM4.RotateY( DegToRad( -MouseA_.X ) )
+                   * TSingleM4.RotateX( DegToRad( -MouseA_.Y ) )
+                   * TSingleM4.Translate( 0, 0, 16+Roo2(3)*16 );
 end;
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【ルーチン】

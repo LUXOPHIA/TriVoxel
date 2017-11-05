@@ -362,6 +362,15 @@
         <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Camera.pas"/>
         <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Inform.pas"/>
         <DCCReference Include="Core.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T2.D1.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T2.D2.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T2.D3.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T1.D1.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T1.D2.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T1.D3.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D3.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.pas"/>
+        <DCCReference Include="_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D2.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -386,6 +395,12 @@
             <Deployment Version="3">
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\TriVoxel.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win64">
+                        <RemoteName>TriVoxel.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

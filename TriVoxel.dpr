@@ -48,7 +48,16 @@ uses
   LUX.GPU.OpenGL.Shaper.Preset in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Shaper.Preset.pas',
   LUX.GPU.OpenGL.Camera in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Camera.pas',
   LUX.GPU.OpenGL.Inform in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Inform.pas',
-  Core in 'Core.pas';
+  Core in 'Core.pas',
+  LUX.Curve.T2.D1 in '_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T2.D1.pas',
+  LUX.Curve.T2.D2 in '_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T2.D2.pas',
+  LUX.Curve.T2.D3 in '_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T2.D3.pas',
+  LUX.Curve.T1.D1 in '_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T1.D1.pas',
+  LUX.Curve.T1.D2 in '_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T1.D2.pas',
+  LUX.Curve.T1.D3 in '_LIBRARY\LUXOPHIA\LUX.Curve\LUX.Curve.T1.D3.pas',
+  LUX.Geometry.D3 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D3.pas',
+  LUX.Geometry in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.pas',
+  LUX.Geometry.D2 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D2.pas';
 
 {$R *.res}
 

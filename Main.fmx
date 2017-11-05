@@ -18,68 +18,94 @@ object Form1: TForm1
     Left = 25
     Top = 50
   end
-  inline GLViewer1: TGLViewer
+  inline GLViewerP: TGLViewer
     Position.X = 10.000000000000000000
     Position.Y = 35.000000000000000000
     Size.Width = 500.000000000000000000
     Size.Height = 500.000000000000000000
     Size.PlatformDefault = False
-    OnMouseDown = GLViewer1MouseDown
-    OnMouseMove = GLViewer1MouseMove
-    OnMouseUp = GLViewer1MouseUp
+    OnMouseDown = GLViewerPMouseDown
+    OnMouseMove = GLViewerPMouseMove
+    OnMouseUp = GLViewerPMouseUp
   end
-  inline GLViewer2: TGLViewer
+  inline GLViewerS: TGLViewer
     Position.X = 520.000000000000000000
     Position.Y = 35.000000000000000000
     Size.Width = 500.000000000000000000
     Size.Height = 500.000000000000000000
     Size.PlatformDefault = False
-    OnMouseDown = GLViewer1MouseDown
-    OnMouseMove = GLViewer1MouseMove
-    OnMouseUp = GLViewer1MouseUp
+    OnMouseDown = GLViewerPMouseDown
+    OnMouseMove = GLViewerPMouseMove
+    OnMouseUp = GLViewerPMouseUp
   end
-  object Label1: TLabel
+  object LabelPV: TLabel
     StyledSettings = [Family, Style]
     Position.X = 10.000000000000000000
     Position.Y = 540.000000000000000000
-    Size.Width = 501.000000000000000000
+    Size.Width = 450.000000000000000000
     Size.Height = 20.000000000000000000
     Size.PlatformDefault = False
-    TextSettings.Font.Size = 20.000000000000000000
-    TextSettings.HorzAlign = Center
+    TextSettings.Font.Size = 15.000000000000000000
+    TextSettings.HorzAlign = Trailing
     Text = '0'
-    TabOrder = 2
+    TabOrder = 4
   end
-  object Label2: TLabel
+  object LabelSV: TLabel
     StyledSettings = [Family, Style]
     Position.X = 520.000000000000000000
     Position.Y = 540.000000000000000000
-    Size.Width = 501.000000000000000000
+    Size.Width = 450.000000000000000000
     Size.Height = 20.000000000000000000
     Size.PlatformDefault = False
-    TextSettings.Font.Size = 20.000000000000000000
-    TextSettings.HorzAlign = Center
+    TextSettings.Font.Size = 15.000000000000000000
+    TextSettings.HorzAlign = Trailing
     Text = '0'
     TabOrder = 1
   end
-  object Label3: TLabel
+  object LabelP: TLabel
+    StyledSettings = [Family, Style, FontColor]
     Position.X = 10.000000000000000000
     Position.Y = 10.000000000000000000
     Size.Width = 500.000000000000000000
     Size.Height = 20.000000000000000000
     Size.PlatformDefault = False
-    TextSettings.HorzAlign = Center
+    TextSettings.Font.Size = 15.000000000000000000
     Text = 'PEF : Projected Edge Function'
-    TabOrder = 4
+    TabOrder = 6
   end
-  object Label4: TLabel
+  object LabelS: TLabel
+    StyledSettings = [Family, Style, FontColor]
     Position.X = 520.000000000000000000
     Position.Y = 10.000000000000000000
     Size.Width = 500.000000000000000000
     Size.Height = 20.000000000000000000
     Size.PlatformDefault = False
-    TextSettings.HorzAlign = Center
+    TextSettings.Font.Size = 15.000000000000000000
     Text = 'SAT : Separating Axis Ttheorem'
+    TabOrder = 5
+  end
+  object LabelPVU: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 460.000000000000000000
+    Position.Y = 540.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 15.000000000000000000
+    TextSettings.HorzAlign = Trailing
+    Text = 'voxels'
     TabOrder = 3
+  end
+  object LabelSVU: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 970.000000000000000000
+    Position.Y = 540.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 15.000000000000000000
+    TextSettings.HorzAlign = Trailing
+    Text = 'voxels'
+    TabOrder = 2
   end
 end
