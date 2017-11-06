@@ -56,7 +56,8 @@ implementation //###############################################################
 {$R *.fmx}
 
 uses System.Math,
-     Winapi.Windows;
+     Winapi.Windows,
+     LUX.Geometry.Curve.T1.D3;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
