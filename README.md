@@ -12,11 +12,11 @@
 > ![](https://developer.nvidia.com/sites/default/files/akamai/gameworks/images/Voxelization/Voxelization_blog_fig_5.png)  
 > \* [The Basics of GPU Voxelization](https://developer.nvidia.com/content/basics-gpu-voxelization)：[NVIDIA Developer](https://developer.nvidia.com)
 
-２次元における三角形と長方形の衝突判定には、三角形の辺に垂直な**内向き**のベクトル（辺法線）を用いる。辺法線の方向に対して 最も前方 の長方形の頂点が、辺の内側に入るかどうかを３辺それぞれで調べ、すべて真の場合、三角形と長方形は衝突している。
+２次元における三角形と長方形の衝突判定には、三角形の辺に垂直な**内向き**のベクトル（辺法線）を用いる。辺法線の方向に沿って 最も前方 の長方形の頂点が、辺の内側に入るかどうかを３辺それぞれで調べ、すべて真の場合、三角形と長方形は衝突している。
 > ![](https://shikihuiku.files.wordpress.com/2012/08/voxel_cross_tri.png)  
 > \* [GPU上でのvoxel構築手法](https://shikihuiku.wordpress.com/2012/08/02/gpu上でのvoxel構築手法/)：[shikihuiku](https://shikihuiku.wordpress.com)
 
-もちろん、２次元の衝突判定を３方向から行ったとしても、三角ポリゴンの法線方向の衝突は判定できない。そこで、ポリゴンの法線方向に対して 最も前方 と 最も後方 のボクセル頂点を求め、その区間内に三角ポリゴンの平面が入るかどうかも判定する。
+もちろん、２次元の衝突判定を３方向から行ったとしても、三角ポリゴンの法線方向の衝突は判定できない。そこで、ポリゴンの法線方向に沿って 最も前方 と 最も後方 のボクセル頂点を求め、その区間内に三角ポリゴンの平面が入るかどうかも判定する。
 > ![](https://shikihuiku.files.wordpress.com/2012/08/voxel_cross_plane1.png)  
 > \* [GPU上でのvoxel構築手法](https://shikihuiku.wordpress.com/2012/08/02/gpu上でのvoxel構築手法/)：[shikihuiku](https://shikihuiku.wordpress.com)
 
