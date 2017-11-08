@@ -58,7 +58,9 @@ uses
   LUX.Geometry.D3 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D3.pas',
   LUX.Geometry in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.pas',
   LUX.Geometry.D2 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D2.pas',
-  LUX.Geometry.Curve.T1.D3 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.Curve.T1.D3.pas';
+  LUX.Geometry.Curve.T1.D3 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.Curve.T1.D3.pas',
+  LUX.GPU.OpenGL.Shaper.Octree in '..\・Collisioner\_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Shaper.Octree.pas',
+  LUX.GPU.OpenGL.Shaper.Voxels in '..\・Collisioner\_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Shaper.Voxels.pas';
 
 {$R *.res}
 
