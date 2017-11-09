@@ -22,8 +22,7 @@
 * 三角形の AABB が、長方形と衝突する。
 * 三角形の３辺において、辺法線の方向に沿って 最も前方 の長方形の頂点が辺の内側に入る。
 
-> ![](https://shikihuiku.files.wordpress.com/2012/08/voxel_cross_tri.png)  
-> \* [GPU上でのvoxel構築手法](https://shikihuiku.wordpress.com/2012/08/02/gpu上でのvoxel構築手法/)：[shikihuiku](https://shikihuiku.wordpress.com)
+![](https://media.githubusercontent.com/media/LUXOPHIA/TriVoxel/master/--------/_README/Collision2D_TRI-BOX.png)  
 
 もちろん、２次元の衝突判定を３方向から行ったとしても、三角ポリゴンの法線方向の衝突は判定できない。そこで、ポリゴンの法線方向に沿って 最も前方 と 最も後方 のボクセル頂点を求め、その区間内に三角ポリゴンの平面が入るかどうかも判定する。
 > ![](https://shikihuiku.files.wordpress.com/2012/08/voxel_cross_plane1.png)  
