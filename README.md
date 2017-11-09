@@ -20,7 +20,7 @@
 以下の２つの条件が満たされる場合、三角形と長方形は衝突している。
 
 * 三角形の AABB が、長方形と衝突する。
-* 三角形の３辺において、辺法線の方向に沿って 最も前方 の長方形の頂点が辺の内側に入る。
+* 三角形の３辺すべてにおいて、辺法線の方向に沿って 最も前方 の長方形の頂点が辺の内側に入る。
 
 ![](https://media.githubusercontent.com/media/LUXOPHIA/TriVoxel/master/--------/_README/Collision2D_TRI-BOX.png)  
 
