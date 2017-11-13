@@ -9,14 +9,10 @@ uses
   LUX.D4.V4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D4.V4.pas',
   LUX.D5 in '_LIBRARY\LUXOPHIA\LUX\LUX.D5.pas',
   LUX.DN in '_LIBRARY\LUXOPHIA\LUX\LUX.DN.pas',
-  LUX.Lattice.T1 in '_LIBRARY\LUXOPHIA\LUX\LUX.Lattice.T1.pas',
-  LUX.Lattice.T2 in '_LIBRARY\LUXOPHIA\LUX\LUX.Lattice.T2.pas',
-  LUX.Lattice.T3 in '_LIBRARY\LUXOPHIA\LUX\LUX.Lattice.T3.pas',
   LUX.M2 in '_LIBRARY\LUXOPHIA\LUX\LUX.M2.pas',
   LUX.M3 in '_LIBRARY\LUXOPHIA\LUX\LUX.M3.pas',
   LUX.M4 in '_LIBRARY\LUXOPHIA\LUX\LUX.M4.pas',
   LUX in '_LIBRARY\LUXOPHIA\LUX\LUX.pas',
-  LUX.Tree in '_LIBRARY\LUXOPHIA\LUX\LUX.Tree.pas',
   LUX.D1 in '_LIBRARY\LUXOPHIA\LUX\LUX.D1.pas',
   LUX.D2.M4 in '_LIBRARY\LUXOPHIA\LUX\LUX.D2.M4.pas',
   LUX.D2 in '_LIBRARY\LUXOPHIA\LUX\LUX.D2.pas',
@@ -60,7 +56,13 @@ uses
   LUX.Geometry.D2 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.D2.pas',
   LUX.Geometry.Curve.T1.D3 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Geometry.Curve.T1.D3.pas',
   LUX.GPU.OpenGL.Shaper.Octree in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Shaper.Octree.pas',
-  LUX.GPU.OpenGL.Shaper.Voxels in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Shaper.Voxels.pas';
+  LUX.GPU.OpenGL.Shaper.Voxels in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Shaper.Voxels.pas',
+  LUX.Data.Lattice.T2 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Lattice.T2.pas',
+  LUX.Data.Lattice.T3 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Lattice.T3.pas',
+  LUX.Data.Octree.D3 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Octree.D3.pas',
+  LUX.Data.Octree in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Octree.pas',
+  LUX.Data.Tree in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Tree.pas',
+  LUX.Data.Lattice.T1 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Lattice.T1.pas';
 
 {$R *.res}
 
