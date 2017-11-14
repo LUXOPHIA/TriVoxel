@@ -59,10 +59,10 @@ uses
   LUX.GPU.OpenGL.Shaper.Voxels in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\LUX.GPU.OpenGL.Shaper.Voxels.pas',
   LUX.Data.Lattice.T2 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Lattice.T2.pas',
   LUX.Data.Lattice.T3 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Lattice.T3.pas',
-  LUX.Data.Octree.D3 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Octree.D3.pas',
   LUX.Data.Octree in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Octree.pas',
   LUX.Data.Tree in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Tree.pas',
-  LUX.Data.Lattice.T1 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Lattice.T1.pas';
+  LUX.Data.Lattice.T1 in '_LIBRARY\LUXOPHIA\LUX\LUX.Data.Lattice.T1.pas',
+  LUX.Data.Octree.D3 in '_LIBRARY\LUXOPHIA\LUX.Geometry\LUX.Data.Octree.D3.pas';
 
 {$R *.res}
 
