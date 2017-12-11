@@ -10,7 +10,7 @@
 > \* [GPU上でのvoxel構築手法](https://shikihuiku.wordpress.com/2012/08/02/gpu上でのvoxel構築手法/)：[shikihuiku](https://shikihuiku.wordpress.com)
 
 ----
-３Ｄ空間での **点座標** は、以下のレコード型によって定義される。
+３Ｄでの **点座標** は、以下のレコード型によって定義される。
 
 > [`LUX.D3`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas).pas
 > 
@@ -19,7 +19,7 @@
 >     * `X`/`Y`/`Z` :Double  
 >     座標値。
 
-３Ｄ空間での **軸平行な直方体(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
+３Ｄでの **軸平行な直方体(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
 
 > [`LUX.D3`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas).pas
 > 
@@ -34,7 +34,7 @@
 >     * **function** [`Collision`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas#L602)( **const** Area_:TDoubleArea3D ) :Boolean  
 > 3D-AABB 同士の衝突判定。
 
-３Ｄ空間での **三角形平面** は、以下のレコード型によって定義される。
+３Ｄでの **三角形平面** は、以下のレコード型によって定義される。
 
 > [`LUX.Geometry.D3`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX.Geometry/LUX.Geometry.D3.pas).pas
 > 
@@ -63,11 +63,11 @@
 
 ----
 ## ■ PEF : Projected Edge Function
-３Ｄの三角形を XY, YZ, ZX 平面へ投影した上で、２次元の衝突判定を利用する方法。
+３Ｄの三角形を XY, YZ, ZX 平面へ投影した上で、２Ｄの衝突判定を利用する方法。
 > ![](https://developer.nvidia.com/sites/default/files/akamai/gameworks/images/Voxelization/Voxelization_blog_fig_5.png)  
 > \* [The Basics of GPU Voxelization](https://developer.nvidia.com/content/basics-gpu-voxelization)：[NVIDIA Developer](https://developer.nvidia.com)
 
-２Ｄ空間での **点座標** は、以下のレコード型によって定義される。
+２Ｄでの **点座標** は、以下のレコード型によって定義される。
 
 > `LUX.D2`.pas
 > 
@@ -76,7 +76,7 @@
 >     * `X`/`Y` :Double  
 > 座標値。
 
-２Ｄ空間での **軸平行な長方形(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
+２Ｄでの **軸平行な長方形(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
 
 > `LUX.D2`.pas
 > 
@@ -89,7 +89,7 @@
 >     * **function** `Collision`( **const** Area_:TSingleArea2D ) :Boolean  
 > 2D-AABB 同士の衝突判定。
 
-２Ｄ空間での **三角形** は、以下のレコード型によって定義される。
+２Ｄでの **三角形** は、以下のレコード型によって定義される。
 
 > `LUX.Geometry.D2`.pas
 > 
@@ -125,7 +125,7 @@ begin
 end;
 ```
 
-ただ、第１条件の 2D-AABB 同士の衝突は、わざわざ射影した２Ｄ上で判定せずとも、元の３Ｄ空間での 3D-AABB 同士の衝突としてまとめることができるので、最終的な実装としては以下のようになる。
+ただ、第１条件の 2D-AABB 同士の衝突は、わざわざ射影した２Ｄ上で判定せずとも、元の３Ｄでの 3D-AABB 同士の衝突としてまとめることができるので、最終的な実装としては以下のようになる。
 
 ```pascal
 function TDoubleTria3D.CollisionPEF( const Area_:TDoubleArea3D ) :Boolean;
@@ -144,7 +144,7 @@ begin
 end;
 ```
 
-なお、２Ｄの衝突判定を３軸方向から行ったとしても、３Ｄ空間での衝突判定としては不十分であるため、ポリゴンの法線方向に沿った衝突を判定する`CheckPlane`関数が加えられている。
+なお、２Ｄの衝突判定を３軸方向から行ったとしても、３Ｄでの衝突判定としては不十分であるため、ポリゴンの法線方向に沿った衝突を判定する`CheckPlane`関数が加えられている。
 > ![](https://shikihuiku.files.wordpress.com/2012/08/voxel_cross_plane1.png)  
 > \* [GPU上でのvoxel構築手法](https://shikihuiku.wordpress.com/2012/08/02/gpu上でのvoxel構築手法/)：[shikihuiku](https://shikihuiku.wordpress.com)
 
