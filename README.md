@@ -22,6 +22,7 @@
 ３Ｄ空間での **軸平行な直方体(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
 
 > [`LUX.D3`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas).pas
+
 > * [`TSingleArea3D`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas#L503) = **record**
 > * [`TDoubleArea3D`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas#L555) = **record**
 >     * `Min` :TDouble3D  
@@ -34,6 +35,7 @@
 ３Ｄ空間での **三角形平面** は、以下のレコード型によって定義される。
 
 > [`LUX.Geometry.D3`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX.Geometry/LUX.Geometry.D3.pas).pas
+
 > * [`TSingleTria3D`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX.Geometry/LUX.Geometry.D3.pas#L80) = **record**
 > * [`TDoubleTria3D`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX.Geometry/LUX.Geometry.D3.pas#L127) = **record**
 >     * `Poin1`/`2`/`3` :TDouble3D  
@@ -64,6 +66,7 @@
 ２Ｄ空間での **点座標** は、以下のレコード型によって定義される。
 
 > `LUX.D2`.pas
+
 > * `TSingle2D` = **record**
 > * `TDouble2D` = **record**
 >     * `X`/`Y` :Double  
@@ -72,6 +75,7 @@
 ２Ｄ空間での **軸平行な長方形(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
 
 > `LUX.D2`.pas
+
 > * `TSingleArea2D` = **record**
 > * `TDoubleArea2D` = **record**
 >     * `Min` :TSingle2D  
@@ -84,6 +88,7 @@
 ２Ｄ空間での **三角形** は、以下のレコード型によって定義される。
 
 > `LUX.Geometry.D2`.pas
+
 > * `TSingleTria2D` = **record**
 > * `TDoubleTria2D` = **record**
 >     * `Poin1`/`2`/`3` :TDouble2D  
