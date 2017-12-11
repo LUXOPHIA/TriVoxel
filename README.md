@@ -186,6 +186,48 @@ end;
 > ![](https://www.researchgate.net/profile/Carsten_Preusche/publication/224990152/figure/fig2/AS:302767072661505@1449196703470/Figure-3-Collision-detection-between-triangle-and-voxel-using-the-Separating-Axis.png)  
 > \* [Improvements of the Voxmap-PointShell Algorithm - Fast Generation of Haptic Data-Structures](https://www.researchgate.net/publication/224990152_Improvements_of_the_Voxmap-PointShell_Algorithm_-_Fast_Generation_of_Haptic_Data-Structures)：[ResearchGate](https://www.researchgate.net)
 
+具体的な実装は以下のようになる。
+
+```pascal
+function TDoubleTria3D.CollisionSAT( const Area_:TDoubleArea3D ) :Boolean;
+//······································
+     function CheckPlane :Boolean;
+     begin
+          ～
+     end;
+     //·································
+     function Check( const Vec_:TDouble3D ) :Boolean;
+     begin
+          Result := ProjVec( Vec_ ).Collision( Area_.ProjVec( Vec_ ) );
+     end;
+//······································
+const
+     AX :TDouble3D = ( X:1; Y:0; Z:0 );
+     AY :TDouble3D = ( X:0; Y:1; Z:0 );
+     AZ :TDouble3D = ( X:0; Y:0; Z:1 );
+var
+   E1, E2, E3 :TDouble3D;
+begin
+     E1 := Edge1;
+     E2 := Edge2;
+     E3 := Edge3;
+
+     Result := AABB.Collision( Area_ )          // Check( AX ) and Check( AY ) and Check( AZ )
+           and CheckPlane                       // Check( Norv )
+           and Check( CrossProduct( AX, E1 ) )
+           and Check( CrossProduct( AX, E2 ) )
+           and Check( CrossProduct( AX, E3 ) )
+           and Check( CrossProduct( AY, E1 ) )
+           and Check( CrossProduct( AY, E2 ) )
+           and Check( CrossProduct( AY, E3 ) )
+           and Check( CrossProduct( AZ, E1 ) )
+           and Check( CrossProduct( AZ, E2 ) )
+           and Check( CrossProduct( AZ, E3 ) );
+end;
+```
+
+ここでＸ/Ｙ/Ｚ軸方向の分離判定は 3D-AABB との衝突判定と等価であり、さらに三角面の法線方向の分離判定は前述の`CheckPlane`関数と等価である。
+
 ----
 
 * [The Basics of GPU Voxelization](https://developer.nvidia.com/content/basics-gpu-voxelization)：[NVIDIA Developer](https://developer.nvidia.com)
