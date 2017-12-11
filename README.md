@@ -1,5 +1,5 @@
 ﻿# TriVoxel
-[ポリゴン](https://ja.wikipedia.org/wiki/ポリゴン)：[Polygon](https://en.wikipedia.org/wiki/Polygon_(computer_graphics))（三角形）と [ボクセル](https://ja.wikipedia.org/wiki/ボクセル)：[Voxel](https://en.wikipedia.org/wiki/Voxel)（軸平行直方体）との [衝突/交差/干渉を判定](https://ja.wikipedia.org/wiki/衝突判定)([Collision detection](https://en.wikipedia.org/wiki/Collision_detection))する方法。この手法を利用することで、任意のポリゴンモデルをボクセルモデルへ高速に変換することが可能となる。
+[ポリゴン](https://ja.wikipedia.org/wiki/ポリゴン)：[Polygon](https://en.wikipedia.org/wiki/Polygon_(computer_graphics))（三角形）と [ボクセル](https://ja.wikipedia.org/wiki/ボクセル)：[Voxel](https://en.wikipedia.org/wiki/Voxel)（軸平行直方体）との [衝突/交差/干渉を判定](https://ja.wikipedia.org/wiki/衝突判定)([Collision detection](https://en.wikipedia.org/wiki/Collision_detection)) する方法。この手法を利用することで、任意のポリゴンモデルをボクセルモデルへ高速に変換することが可能となる。
 
 アルゴリズムとしては、PEF法 と SAT法 の両方を実装。もちろん"接触"に近い衝突の場合、数値誤差によって結果が曖昧になるが、その他の一般的な状態において基本的に同一の結果が得られることを確認した。
 
@@ -62,7 +62,7 @@
 > SAT法 による 3D-AABB との衝突判定。
 
 ----
-## PEF : Projected Edge Function
+## ■ PEF : Projected Edge Function
 ３Ｄの三角形を XY, YZ, ZX 平面へ投影した上で、２次元の衝突判定を利用する方法。
 > ![](https://developer.nvidia.com/sites/default/files/akamai/gameworks/images/Voxelization/Voxelization_blog_fig_5.png)  
 > \* [The Basics of GPU Voxelization](https://developer.nvidia.com/content/basics-gpu-voxelization)：[NVIDIA Developer](https://developer.nvidia.com)
@@ -150,7 +150,7 @@ end;
 
 ----
 
-## SAT : Separating Axis Theorem
+## ■ SAT : Separating Axis Theorem
 [分離超平面定理](https://ja.wikipedia.org/wiki/分離超平面定理) を利用することで、３次元的にポリゴンとボクセルの衝突判定を行う方法。
 > [[YouTube]](https://www.youtube.com)  
 > [![Separating Axis Theorem (SAT) Explanation.](http://img.youtube.com/vi/Ap5eBYKlGDo/maxresdefault.jpg)](https://youtu.be/Ap5eBYKlGDo)  
@@ -185,11 +185,6 @@ end;
 > 
 > ![](https://www.researchgate.net/profile/Carsten_Preusche/publication/224990152/figure/fig2/AS:302767072661505@1449196703470/Figure-3-Collision-detection-between-triangle-and-voxel-using-the-Separating-Axis.png)  
 > \* [Improvements of the Voxmap-PointShell Algorithm - Fast Generation of Haptic Data-Structures](https://www.researchgate.net/publication/224990152_Improvements_of_the_Voxmap-PointShell_Algorithm_-_Fast_Generation_of_Haptic_Data-Structures)：[ResearchGate](https://www.researchgate.net)
-
-----
-## ■実装
-
-
 
 ----
 
