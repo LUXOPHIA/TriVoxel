@@ -109,8 +109,8 @@
 > 1. 三角形`TDoubleTria2D`の AABB が、長方形`TDoubleArea2D`と衝突する。  
 > 1. 三角形の３辺すべてにおいて、辺法線`Enor*`の方向に沿って**最も前方**の長方形の頂点が辺の内側に入る。  
 > `function TDoubleTria2D.ColliEdge( const Area_:TDoubleArea2D ) :Boolean`メソッドを用いる。
-
-![](https://media.githubusercontent.com/media/LUXOPHIA/TriVoxel/master/--------/_README/Collision2D_TRI-BOX.png)  
+> 
+> ![](https://media.githubusercontent.com/media/LUXOPHIA/TriVoxel/master/--------/_README/Collision2D_TRI-BOX.png) 
 
 ２Ｄにおける三角形と長方形の衝突判定を実装すると以下のようになる。
 
