@@ -1,5 +1,5 @@
 ﻿# TriVoxel
-[ポリゴン](https://ja.wikipedia.org/wiki/ポリゴン)：[Polygon](https://en.wikipedia.org/wiki/Polygon_(computer_graphics))（三角形）と [ボクセル](https://ja.wikipedia.org/wiki/ボクセル)：[Voxel](https://en.wikipedia.org/wiki/Voxel)（軸平行直方体）との [衝突/交差/干渉を判定](https://ja.wikipedia.org/wiki/衝突判定)([Collision](https://en.wikipedia.org/wiki/Collision_detection))する方法。この手法を利用することで、任意のポリゴンモデルをボクセルモデルへ高速に変換することが可能となる。
+[ポリゴン](https://ja.wikipedia.org/wiki/ポリゴン)：[Polygon](https://en.wikipedia.org/wiki/Polygon_(computer_graphics))（三角形）と [ボクセル](https://ja.wikipedia.org/wiki/ボクセル)：[Voxel](https://en.wikipedia.org/wiki/Voxel)（軸平行直方体）との [衝突/交差/干渉を判定](https://ja.wikipedia.org/wiki/衝突判定)([Collision detection](https://en.wikipedia.org/wiki/Collision_detection))する方法。この手法を利用することで、任意のポリゴンモデルをボクセルモデルへ高速に変換することが可能となる。
 
 アルゴリズムとしては、PEF法 と SAT法 の両方を実装。もちろん"接触"に近い衝突の場合、数値誤差によって結果が曖昧になるが、その他の一般的な状態において基本的に同一の結果が得られることを確認した。
 
