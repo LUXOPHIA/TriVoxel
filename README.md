@@ -128,8 +128,8 @@ function TDoubleTria3D.CollisionPEF( const Area_:TDoubleArea3D ) :Boolean;
 //······································
      function CheckPlane :Boolean;
      begin
-          ～
-     end;
+          ～
+     end;
 //······································
 begin
      Result := AABB.Collision( Area_ )
