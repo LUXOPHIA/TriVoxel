@@ -1,5 +1,5 @@
 ﻿# TriVoxel
-[ポリゴン](https://ja.wikipedia.org/wiki/ポリゴン)：[Polygon](https://en.wikipedia.org/wiki/Polygon_(computer_graphics))（三角形）と [ボクセル](https://ja.wikipedia.org/wiki/ボクセル)：[Voxel](https://en.wikipedia.org/wiki/Voxel)（軸平行直方体）との [衝突/交差/干渉を判定](https://ja.wikipedia.org/wiki/衝突判定)([Collision detection](https://en.wikipedia.org/wiki/Collision_detection))する方法。この手法を利用することで、任意のポリゴンモデルをボクセルモデルへ高速に変換することが可能となる。
+[ポリゴン](https://ja.wikipedia.org/wiki/ポリゴン)：[Polygon](https://en.wikipedia.org/wiki/Polygon_(computer_graphics))（三角形）と [ボクセル](https://ja.wikipedia.org/wiki/ボクセル)：[Voxel](https://en.wikipedia.org/wiki/Voxel)（軸平行直方体）との [衝突/交差/干渉を判定](https://ja.wikipedia.org/wiki/衝突判定)([Collision detection](https://en.wikipedia.org/wiki/Collision_detection)) する方法。この手法を利用することで、任意のポリゴンモデルをボクセルモデルへ高速に変換することが可能となる。
 
 アルゴリズムとしては、PEF法 と SAT法 の両方を実装。もちろん"接触"に近い衝突の場合、数値誤差によって結果が曖昧になるが、その他の一般的な状態において基本的に同一の結果が得られることを確認した。
 
@@ -10,7 +10,7 @@
 > \* [GPU上でのvoxel構築手法](https://shikihuiku.wordpress.com/2012/08/02/gpu上でのvoxel構築手法/)：[shikihuiku](https://shikihuiku.wordpress.com)
 
 ----
-３Ｄ空間での **点座標** は、以下のレコード型によって定義される。
+３Ｄでの **点座標** は、以下のレコード型によって定義される。
 
 > [`LUX.D3`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas).pas
 > 
@@ -19,7 +19,7 @@
 >     * `X`/`Y`/`Z` :Double  
 >     座標値。
 
-３Ｄ空間での **軸平行な直方体(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
+３Ｄでの **軸平行な直方体(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
 
 > [`LUX.D3`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas).pas
 > 
@@ -29,10 +29,12 @@
 >     XYZ軸方向の最小値。
 >     * `Max` :TDouble3D  
 >     XYZ軸方向の最大値。
+>     * **function** `ProjVec`( **const** Vec_:TDouble3D ) :TDoubleArea  
+> 任意のベクトル方向へ射影した１Ｄの範囲を返す。
 >     * **function** [`Collision`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas#L602)( **const** Area_:TDoubleArea3D ) :Boolean  
->     3D-AABB 同士の衝突判定。
+> 3D-AABB 同士の衝突判定。
 
-３Ｄ空間での **三角形平面** は、以下のレコード型によって定義される。
+３Ｄでの **三角形平面** は、以下のレコード型によって定義される。
 
 > [`LUX.Geometry.D3`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX.Geometry/LUX.Geometry.D3.pas).pas
 > 
@@ -52,18 +54,20 @@
 > ＺＸ平面上へ投影した２Ｄの三角形。
 >     * **property** `AABB` :TDoubleArea3D  
 > 三角面を内包する 3D-AABB 。
+>     * **function** `ProjVec`( **const** Vec_:TDouble3D ) :TDoubleArea  
+> 任意のベクトル方向へ射影した１Ｄの範囲を返す。
 >     * **function** [`CollisionPEF`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX.Geometry/LUX.Geometry.D3.pas#L161)( **const** Area_:TDoubleArea3D ) :Boolean  
 > PEF法 による 3D-AABB との衝突判定。
 >     * **function** [`CollisionSAT`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX.Geometry/LUX.Geometry.D3.pas#L162)( **const** Area_:TDoubleArea3D ) :Boolean  
 > SAT法 による 3D-AABB との衝突判定。
 
 ----
-## PEF : Projected Edge Function
-３Ｄの三角形を XY, YZ, ZX 平面へ投影した上で、２次元の衝突判定を利用する方法。
+## ■ PEF : Projected Edge Function
+３Ｄの三角形を XY, YZ, ZX 平面へ投影した上で、２Ｄの衝突判定を利用する方法。
 > ![](https://developer.nvidia.com/sites/default/files/akamai/gameworks/images/Voxelization/Voxelization_blog_fig_5.png)  
 > \* [The Basics of GPU Voxelization](https://developer.nvidia.com/content/basics-gpu-voxelization)：[NVIDIA Developer](https://developer.nvidia.com)
 
-２Ｄ空間での **点座標** は、以下のレコード型によって定義される。
+２Ｄでの **点座標** は、以下のレコード型によって定義される。
 
 > `LUX.D2`.pas
 > 
@@ -72,7 +76,7 @@
 >     * `X`/`Y` :Double  
 > 座標値。
 
-２Ｄ空間での **軸平行な長方形(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
+２Ｄでの **軸平行な長方形(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
 
 > `LUX.D2`.pas
 > 
@@ -85,7 +89,7 @@
 >     * **function** `Collision`( **const** Area_:TSingleArea2D ) :Boolean  
 > 2D-AABB 同士の衝突判定。
 
-２Ｄ空間での **三角形** は、以下のレコード型によって定義される。
+２Ｄでの **三角形** は、以下のレコード型によって定義される。
 
 > `LUX.Geometry.D2`.pas
 > 
@@ -121,7 +125,7 @@ begin
 end;
 ```
 
-ただ、第１条件の 2D-AABB 同士の衝突は、わざわざ射影した２Ｄ上で判定せずとも、元の３Ｄ空間での 3D-AABB 同士の衝突としてまとめることができるので、最終的な実装としては以下のようになる。
+ただ、第１条件の 2D-AABB 同士の衝突は、わざわざ射影した２Ｄ上で判定せずとも、元の３Ｄでの 3D-AABB 同士の衝突としてまとめることができるので、最終的な実装としては以下のようになる。
 
 ```pascal
 function TDoubleTria3D.CollisionPEF( const Area_:TDoubleArea3D ) :Boolean;
@@ -140,13 +144,13 @@ begin
 end;
 ```
 
-なお、２Ｄの衝突判定を３軸方向から行ったとしても、三角ポリゴンの法線方向の衝突は判定できないため、ポリゴンの法線方向に沿った衝突を判定する`CheckPlane`関数が加えられている。
+なお、２Ｄの衝突判定を３軸方向から行ったとしても、３Ｄでの衝突判定としては不十分であるため、ポリゴンの法線方向に沿った衝突を判定する`CheckPlane`関数が加えられている。
 > ![](https://shikihuiku.files.wordpress.com/2012/08/voxel_cross_plane1.png)  
 > \* [GPU上でのvoxel構築手法](https://shikihuiku.wordpress.com/2012/08/02/gpu上でのvoxel構築手法/)：[shikihuiku](https://shikihuiku.wordpress.com)
 
 ----
 
-## SAT : Separating Axis Theorem
+## ■ SAT : Separating Axis Theorem
 [分離超平面定理](https://ja.wikipedia.org/wiki/分離超平面定理) を利用することで、３次元的にポリゴンとボクセルの衝突判定を行う方法。
 > [[YouTube]](https://www.youtube.com)  
 > [![Separating Axis Theorem (SAT) Explanation.](http://img.youtube.com/vi/Ap5eBYKlGDo/maxresdefault.jpg)](https://youtu.be/Ap5eBYKlGDo)  
@@ -156,14 +160,31 @@ end;
 > ![Illustration of the hyperplane separation theorem.](https://upload.wikimedia.org/wikipedia/commons/9/9b/Separating_axis_theorem2008.png)  
 > \* [Hyperplane separation theorem](https://en.wikipedia.org/wiki/Hyperplane_separation_theorem)：[Wikipedia](https://en.wikipedia.org)
 
-凸体を多面体に限るのであれば、調べるべき方向の数は有限となる。ポリゴンとボクセルの場合、13方向について調べるだけでよい。
+具体的には、指定したベクトル`Vec`の垂直方向へ、三角面`Tria`とボクセル`Area`を射影し、その１Ｄの範囲が重なるかどうかで、分離面の存在が判定できる。
+
+> `Tria.ProjVec( Vec ).Collision( Area.ProjVec( Vec ) )`
+
+さらに、凸体を多面体に限るのであれば、調べるべき方向の数は有限となる。
+特にポリゴンとボクセルの場合、以下の **13方向** について調べるだけでよい。
+
+> * 三角面の法線
+> * ボクセルの法線
+>     * Ｘ軸方向
+>     * Ｙ軸方向
+>     * Ｚ軸方向
+> * ボクセルの法線 × 三角面の辺　※ **×**：外積
+>     * Ｘ軸 × Ａ辺
+>     * Ｘ軸 × Ｂ辺
+>     * Ｘ軸 × Ｃ辺
+>     * Ｙ軸 × Ａ辺
+>     * Ｙ軸 × Ｂ辺
+>     * Ｙ軸 × Ｃ辺
+>     * Ｚ軸 × Ａ辺
+>     * Ｚ軸 × Ｂ辺
+>     * Ｚ軸 × Ｃ辺
+> 
 > ![](https://www.researchgate.net/profile/Carsten_Preusche/publication/224990152/figure/fig2/AS:302767072661505@1449196703470/Figure-3-Collision-detection-between-triangle-and-voxel-using-the-Separating-Axis.png)  
 > \* [Improvements of the Voxmap-PointShell Algorithm - Fast Generation of Haptic Data-Structures](https://www.researchgate.net/publication/224990152_Improvements_of_the_Voxmap-PointShell_Algorithm_-_Fast_Generation_of_Haptic_Data-Structures)：[ResearchGate](https://www.researchgate.net)
-
-----
-## ■実装
-
-
 
 ----
 
