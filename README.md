@@ -16,7 +16,7 @@
 > * [`TSingle3D`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas#L205) = **record**
 > * [`TDouble3D`](https://github.com/LUXOPHIA/TriVoxel/blob/master/_LIBRARY/LUXOPHIA/LUX/LUX.D3.pas#L277) = **record**
 >     * `X`/`Y`/`Z` :Double  
-> 座標値。
+>     座標値。
 
 ３Ｄ空間での **軸平行な直方体(AABB:Axis Aligned Bounding Box)** は、以下のレコード型によって定義される。
 
