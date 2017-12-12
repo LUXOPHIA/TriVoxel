@@ -1,5 +1,5 @@
 ﻿# TriVoxel
- How to detect collision between a polygon (triangle) and a voxel (AABB)?
+**Collision detection between a polygon (triangle) and a voxel (AABB).**
  
 [ポリゴン](https://ja.wikipedia.org/wiki/ポリゴン)：[Polygon](https://en.wikipedia.org/wiki/Polygon_(computer_graphics))（三角形）と [ボクセル](https://ja.wikipedia.org/wiki/ボクセル)：[Voxel](https://en.wikipedia.org/wiki/Voxel)（軸平行直方体）との [衝突/交差/干渉を判定](https://ja.wikipedia.org/wiki/衝突判定)([Collision detection](https://en.wikipedia.org/wiki/Collision_detection)) する方法。この手法を利用することで、任意のポリゴンモデルをボクセルモデルへ高速に変換することが可能となる。
 
