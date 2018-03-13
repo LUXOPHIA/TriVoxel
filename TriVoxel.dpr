@@ -74,7 +74,11 @@ uses
   LUX.Math.Distribution in '_LIBRARY\LUXOPHIA\LUX\Math\LUX.Math.Distribution.pas',
   LUX.Math.Special.Beta in '_LIBRARY\LUXOPHIA\LUX\Math\Special\LUX.Math.Special.Beta.pas',
   LUX.Math.Special.Gamma.Lanczos in '_LIBRARY\LUXOPHIA\LUX\Math\Special\LUX.Math.Special.Gamma.Lanczos.pas',
-  LUX.Math.Special.Gamma.Ooura in '_LIBRARY\LUXOPHIA\LUX\Math\Special\LUX.Math.Special.Gamma.Ooura.pas';
+  LUX.Math.Special.Gamma.Ooura in '_LIBRARY\LUXOPHIA\LUX\Math\Special\LUX.Math.Special.Gamma.Ooura.pas',
+  LUX.GPU.OpenGL.Render_ in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\Render\LUX.GPU.OpenGL.Render_.pas',
+  LUX.GPU.OpenGL.Render in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\Render\_FMX\LUX.GPU.OpenGL.Render.pas',
+  LUX.GPU.OpenGL.Atom.Framer in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\Atom\LUX.GPU.OpenGL.Atom.Framer.pas',
+  LUX.GPU.OpenGL.Atom.Chaner in '_LIBRARY\LUXOPHIA\LUX.GPU.OpenGL\Atom\LUX.GPU.OpenGL.Atom.Chaner.pas';
 
 {$R *.res}
 
