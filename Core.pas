@@ -88,6 +88,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 implementation //############################################################### ■
 
 uses System.Math,
+     Winapi.OpenGL, Winapi.OpenGLext,
      LUX.D4, LUX.Curve.T1.D1,
      LUX.GPU.OpenGL.Matery.Preset;
 
@@ -112,8 +113,13 @@ begin
      PosBuf.Count := 3;
      EleBuf.Count := 2;
 
-     EleBuf[ 0 ] := TCardinal3D.Create( 0, 1, 2 );
-     EleBuf[ 1 ] := TCardinal3D.Create( 2, 1, 0 );
+     with EleBuf.Map( GL_WRITE_ONLY ) do
+     begin
+          Items[ 0 ] := TCardinal3D.Create( 0, 1, 2 );
+          Items[ 1 ] := TCardinal3D.Create( 2, 1, 0 );
+
+          DisposeOf;
+     end;
 end;
 
 destructor TGLShaperTriang.Destroy;
@@ -126,9 +132,14 @@ end;
 
 procedure TGLShaperTriang.Setup( const Tria_:TSingleTria3D );
 begin
-     PosBuf[ 0 ] := Tria_.Poin1;
-     PosBuf[ 1 ] := Tria_.Poin2;
-     PosBuf[ 2 ] := Tria_.Poin3;
+     with PosBuf.Map( GL_WRITE_ONLY ) do
+     begin
+          Items[ 0 ] := Tria_.Poin1;
+          Items[ 1 ] := Tria_.Poin2;
+          Items[ 2 ] := Tria_.Poin3;
+
+          DisposeOf;
+     end;
 end;
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLMateryVoxels
