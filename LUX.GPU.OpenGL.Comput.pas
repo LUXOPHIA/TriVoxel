@@ -10,7 +10,8 @@ uses System.SysUtils, System.UITypes,
      LUX.GPU.OpenGL.Atom.Buffer,
      LUX.GPU.OpenGL.Atom.Buffer.VerBuf,
      LUX.GPU.OpenGL.Atom.Buffer.StoBuf,
-     LUX.GPU.OpenGL.Atom.Imager,
+     LUX.GPU.OpenGL.Atom.Image,
+     LUX.GPU.OpenGL.Atom.Texture,
      LUX.GPU.OpenGL.Atom.Shader,
      LUX.GPU.OpenGL.Atom.Engine;
 
@@ -28,7 +29,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        ///// アクセス
        function GetEngine  :TGLEngine;
        function GetShaderC :TGLShaderC;
-       function GetImagers :TIndexDictionary<String,IGLImager>;
+       function GetImages :TIndexDictionary<String,IGLImage>;
        function GetBuffers :TIndexDictionary<String,IGLBuffer>;
        function GetItemsX :GLuint;
        procedure SetItemsX( const ItemsX_:GLuint );
@@ -52,7 +53,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        ///// プロパティ
        property Engine  :TGLEngine                          read GetEngine  ;
        property ShaderC :TGLShaderC                         read GetShaderC ;
-       property Imagers :TIndexDictionary<String,IGLImager> read GetImagers ;
+       property Images  :TIndexDictionary<String,IGLImage>  read GetImages  ;
        property Buffers :TIndexDictionary<String,IGLBuffer> read GetBuffers ;
        property ItemsX  :GLuint                             read GetItemsX  write SetItemsX;
        property ItemsY  :GLuint                             read GetItemsY  write SetItemsY;
@@ -74,7 +75,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      protected
        _Engine  :TGLEngine;
        _ShaderC :TGLShaderC;
-       _Imagers :TIndexDictionary<String,IGLImager>;
+       _Images  :TIndexDictionary<String,IGLImage>;
        _Buffers :TIndexDictionary<String,IGLBuffer>;
        _ItemsX  :GLuint;
        _ItemsY  :GLuint;
@@ -85,7 +86,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        ///// アクセス
        function GetEngine  :TGLEngine;
        function GetShaderC :TGLShaderC;
-       function GetImagers :TIndexDictionary<String,IGLImager>;
+       function GetImages :TIndexDictionary<String,IGLImage>;
        function GetBuffers :TIndexDictionary<String,IGLBuffer>;
        function GetItemsX :GLuint;
        procedure SetItemsX( const ItemsX_:GLuint );
@@ -111,7 +112,7 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        ///// プロパティ
        property Engine  :TGLEngine                          read GetEngine  ;
        property ShaderC :TGLShaderC                         read GetShaderC ;
-       property Imagers :TIndexDictionary<String,IGLImager> read GetImagers ;
+       property Images  :TIndexDictionary<String,IGLImage>  read GetImages  ;
        property Buffers :TIndexDictionary<String,IGLBuffer> read GetBuffers ;
        property ItemsX  :GLuint                             read GetItemsX  write SetItemsX;
        property ItemsY  :GLuint                             read GetItemsY  write SetItemsY;
@@ -160,9 +161,9 @@ end;
 
 //------------------------------------------------------------------------------
 
-function TGLComput.GetImagers :TIndexDictionary<String,IGLImager>;
+function TGLComput.GetImages :TIndexDictionary<String,IGLImage>;
 begin
-     Result := _Imagers;
+     Result := _Images;
 end;
 
 function TGLComput.GetBuffers :TIndexDictionary<String,IGLBuffer>;
@@ -275,7 +276,7 @@ begin
      _Engine  := TGLEngine .Create;
      _ShaderC := TGLShaderC.Create;
 
-     _Imagers := TIndexDictionary<String,IGLImager>.Create;
+     _Images := TIndexDictionary<String,IGLImage>.Create;
      _Buffers := TIndexDictionary<String,IGLBuffer>.Create;
 
      _Engine.Attach( _ShaderC{Shad} );
@@ -287,7 +288,7 @@ end;
 
 destructor TGLComput.Destroy;
 begin
-     _Imagers.DisposeOf;
+     _Images.DisposeOf;
      _Buffers.DisposeOf;
 
      _Engine .DisposeOf;
@@ -302,11 +303,11 @@ procedure TGLComput.Run;
 var
    K :String;
 begin
-     for K in _Imagers.Keys do
+     for K in _Images.Keys do
      begin
-          with _Imagers[ K ] do
+          with _Images[ K ] do
           begin
-               _Engine.Imagers.Add( Index{BinP}, K{Name} );
+               _Engine.Textures.Add( Index{BinP}, K{Name} );
           end;
      end;
 
@@ -322,9 +323,9 @@ begin
 
      _Engine.Use;
 
-     for K in _Imagers.Keys do
+     for K in _Images.Keys do
      begin
-          with _Imagers[ K ] do Value.UseComput( Index );
+          with _Images[ K ] do Value.UseComput( Index );
      end;
 
      for K in _Buffers.Keys do

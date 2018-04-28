@@ -1,12 +1,12 @@
-﻿unit LUX.GPU.OpenGL.Matery.Imager.Preset;
+﻿unit LUX.GPU.OpenGL.Matery.Texture.Preset;
 
 interface //#################################################################### ■
 
 uses Winapi.OpenGL, Winapi.OpenGLext,
      LUX,
      LUX.GPU.OpenGL,
-     LUX.GPU.OpenGL.Atom.Imager,
-     LUX.GPU.OpenGL.Atom.Imager.D2.Preset,
+     LUX.GPU.OpenGL.Atom.Texture,
+     LUX.GPU.OpenGL.Atom.Texture.D2.Preset,
      LUX.GPU.OpenGL.Matery;
 
 type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【型】
@@ -21,10 +21,10 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      ['{426B4B0E-FDA1-44B2-9B2A-0B7371E2E7D0}']
      {protected}
        ///// アクセス
-       function GetImager :TGLBricer2D_TAlphaColorF;
+       function GetImager :TGLCelTex2D_TAlphaColorF;
      {public}
        ///// プロパティ
-       property Imager :TGLBricer2D_TAlphaColorF read GetImager;
+       property Imager :TGLCelTex2D_TAlphaColorF read GetImager;
      end;
 
      //-------------------------------------------------------------------------
@@ -32,14 +32,14 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      TGLMateryImag = class( TGLMateryNorTex, IGLMateryImag )
      private
      protected
-       _Imager :TGLBricer2D_TAlphaColorF;
+       _Imager :TGLCelTex2D_TAlphaColorF;
        ///// アクセス
-       function GetImager :TGLBricer2D_TAlphaColorF;
+       function GetImager :TGLCelTex2D_TAlphaColorF;
      public
        constructor Create;
        destructor Destroy; override;
        ///// プロパティ
-       property Imager :TGLBricer2D_TAlphaColorF read GetImager;
+       property Imager :TGLCelTex2D_TAlphaColorF read GetImager;
        ///// メソッド
        procedure Use; override;
        procedure Unuse; override;
@@ -51,10 +51,10 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      ['{A3108C6C-0E37-467C-94DF-F99E30B528FA}']
      {protected}
        ///// アクセス
-       function GetImager :TGLBricer2D_TAlphaColorF;
+       function GetImager :TGLCelTex2D_TAlphaColorF;
      {public}
        ///// プロパティ
-       property Imager :TGLBricer2D_TAlphaColorF read GetImager;
+       property Imager :TGLCelTex2D_TAlphaColorF read GetImager;
      end;
 
      //-------------------------------------------------------------------------
@@ -62,14 +62,14 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
      TGLMateryImagG = class( TGLMateryNorTexG, IGLMateryImagG )
      private
      protected
-       _Imager :TGLBricer2D_TAlphaColorF;
+       _Imager :TGLCelTex2D_TAlphaColorF;
        ///// アクセス
-       function GetImager :TGLBricer2D_TAlphaColorF;
+       function GetImager :TGLCelTex2D_TAlphaColorF;
      public
        constructor Create;
        destructor Destroy; override;
        ///// プロパティ
-       property Imager :TGLBricer2D_TAlphaColorF read GetImager;
+       property Imager :TGLCelTex2D_TAlphaColorF read GetImager;
        ///// メソッド
        procedure Use; override;
        procedure Unuse; override;
@@ -95,7 +95,7 @@ implementation //###############################################################
 
 /////////////////////////////////////////////////////////////////////// アクセス
 
-function TGLMateryImag.GetImager :TGLBricer2D_TAlphaColorF;
+function TGLMateryImag.GetImager :TGLCelTex2D_TAlphaColorF;
 begin
      Result := _Imager;
 end;
@@ -108,13 +108,13 @@ begin
 
      with _Engine do
      begin
-          with Imagers do
+          with Textures do
           begin
                Add( 0{BinP}, '_Imager'{Name} );
           end;
      end;
 
-     _Imager := TGLBricer2D_TAlphaColorF.Create;
+     _Imager := TGLCelTex2D_TAlphaColorF.Create;
 end;
 
 destructor TGLMateryImag.Destroy;
@@ -148,7 +148,7 @@ end;
 
 /////////////////////////////////////////////////////////////////////// アクセス
 
-function TGLMateryImagG.GetImager :TGLBricer2D_TAlphaColorF;
+function TGLMateryImagG.GetImager :TGLCelTex2D_TAlphaColorF;
 begin
      Result := _Imager;
 end;
@@ -161,13 +161,13 @@ begin
 
      with _Engine do
      begin
-          with Imagers do
+          with Textures do
           begin
                Add( 0{BinP}, '_Imager'{Name} );
           end;
      end;
 
-     _Imager := TGLBricer2D_TAlphaColorF.Create;
+     _Imager := TGLCelTex2D_TAlphaColorF.Create;
 end;
 
 destructor TGLMateryImagG.Destroy;
