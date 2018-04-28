@@ -1,10 +1,10 @@
-﻿unit LUX.GPU.OpenGL.Atom.Imager.D3.Preset;
+﻿unit LUX.GPU.OpenGL.Atom.Texture.D3.Preset;
 
 interface //#################################################################### ■
 
 uses System.UITypes,
-     FMX.Graphics,
-     LUX, LUX.GPU.OpenGL.Atom.Imager.D3;
+     Vcl.Graphics,
+     LUX, LUX.GPU.OpenGL.Atom.Texture.D3;
 
 type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【型】
 
@@ -12,9 +12,9 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
      //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【クラス】
 
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLBricer3D_AlphaColorF
+     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLCelTex3D_TAlphaColorF
 
-     TGLBricer3D_AlphaColorF = class( TGLBricer3D<TAlphaColorF> )
+     TGLCelTex3D_TAlphaColorF = class( TGLCelTex3D<TAlphaColorF> )
      private
      protected
      public
@@ -22,9 +22,9 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        destructor Destroy; override;
      end;
 
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLGrider3D_AlphaColorF
+     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLPoiTex3D_TAlphaColorF
 
-     TGLGrider3D_AlphaColorF = class( TGLGrider3D<TAlphaColorF> )
+     TGLPoiTex3D_TAlphaColorF = class( TGLPoiTex3D<TAlphaColorF> )
      private
      protected
      public
@@ -32,9 +32,9 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        destructor Destroy; override;
      end;
 
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLBricer3D_Single
+     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLCelTex3D_Single
 
-     TGLBricer3D_Single = class( TGLBricer3D<Single> )
+     TGLCelTex3D_Single = class( TGLCelTex3D<Single> )
      private
      protected
      public
@@ -42,9 +42,9 @@ type //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
        destructor Destroy; override;
      end;
 
-     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLGrider3D_Single
+     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLPoiTex3D_Single
 
-     TGLGrider3D_Single = class( TGLGrider3D<Single> )
+     TGLPoiTex3D_Single = class( TGLPoiTex3D<Single> )
      private
      protected
      public
@@ -66,7 +66,7 @@ uses Winapi.OpenGL, Winapi.OpenGLext;
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$【クラス】
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLBricer3D_AlphaColorF
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLCelTex3D_TAlphaColorF
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
@@ -74,22 +74,22 @@ uses Winapi.OpenGL, Winapi.OpenGLext;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
 
-constructor TGLBricer3D_AlphaColorF.Create;
+constructor TGLCelTex3D_TAlphaColorF.Create;
 begin
      inherited;
 
-     _TexelF := GL_RGBA32F;
+     _TexelF := GL_RGBA;
      _PixelF := GL_RGBA;
      _PixelT := GL_FLOAT;
 end;
 
-destructor TGLBricer3D_AlphaColorF.Destroy;
+destructor TGLCelTex3D_TAlphaColorF.Destroy;
 begin
 
      inherited;
 end;
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLGrider3D_AlphaColorF
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLPoiTex3D_TAlphaColorF
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
@@ -97,22 +97,22 @@ end;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
 
-constructor TGLGrider3D_AlphaColorF.Create;
+constructor TGLPoiTex3D_TAlphaColorF.Create;
 begin
      inherited;
 
-     _TexelF := GL_RGBA32F;
+     _TexelF := GL_RGBA;
      _PixelF := GL_RGBA;
      _PixelT := GL_FLOAT;
 end;
 
-destructor TGLGrider3D_AlphaColorF.Destroy;
+destructor TGLPoiTex3D_TAlphaColorF.Destroy;
 begin
 
      inherited;
 end;
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLBricer3D_Single
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLCelTex3D_Single
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
@@ -120,7 +120,7 @@ end;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
 
-constructor TGLBricer3D_Single.Create;
+constructor TGLCelTex3D_Single.Create;
 begin
      inherited;
 
@@ -129,13 +129,13 @@ begin
      _PixelT := GL_FLOAT;
 end;
 
-destructor TGLBricer3D_Single.Destroy;
+destructor TGLCelTex3D_Single.Destroy;
 begin
 
      inherited;
 end;
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLGrider3D_Single
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TGLPoiTex3D_Single
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& private
 
@@ -143,7 +143,7 @@ end;
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& public
 
-constructor TGLGrider3D_Single.Create;
+constructor TGLPoiTex3D_Single.Create;
 begin
      inherited;
 
@@ -152,7 +152,7 @@ begin
      _PixelT := GL_FLOAT;
 end;
 
-destructor TGLGrider3D_Single.Destroy;
+destructor TGLPoiTex3D_Single.Destroy;
 begin
 
      inherited;
