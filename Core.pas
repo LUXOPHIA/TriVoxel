@@ -385,7 +385,7 @@ begin
           end;
      end;
 
-     PosBuf.Import( Cs );
+     PosBuf.CopyFrom( Cs );
 end;
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TAlgo
