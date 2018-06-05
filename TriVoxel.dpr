@@ -99,7 +99,9 @@ uses
   LUX.Color.Grid.D1 in '_LIBRARY\LUXOPHIA\LUX\Color\Grid\_FMX\LUX.Color.Grid.D1.pas',
   LUX.Color.Grid.D2.Preset in '_LIBRARY\LUXOPHIA\LUX\Color\Grid\D2\_FMX\LUX.Color.Grid.D2.Preset.pas',
   LUX.Color.Grid.D1.Preset in '_LIBRARY\LUXOPHIA\LUX\Color\Grid\D1\_FMX\LUX.Color.Grid.D1.Preset.pas',
-  LUX.Color.Format.HDR in '_LIBRARY\LUXOPHIA\LUX\Color\Format\LUX.Color.Format.HDR.pas';
+  LUX.Color.Format.HDR in '_LIBRARY\LUXOPHIA\LUX\Color\Format\LUX.Color.Format.HDR.pas',
+  LUX.FMX in '_LIBRARY\LUXOPHIA\LUX\FMX\LUX.FMX.pas',
+  LUX.FMX.Controls in '_LIBRARY\LUXOPHIA\LUX\FMX\LUX.FMX.Controls.pas';
 
 {$R *.res}
 
